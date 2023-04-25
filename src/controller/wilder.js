@@ -52,15 +52,12 @@ module.exports = {
 
     addSkill: async (req, res) => {
         try {
-            console.log(req.body)
             const wilderToUpdate = await dataSource
                 .getRepository(Wilder)
                 .findOneBy({ id: req.body.wilderId });
-            console.log(wilderToUpdate);
             const skillToAdd = await dataSource
                 .getRepository(Skill)
                 .findOneBy({ name: req.body.skillName });
-            console.log(skillToAdd);
             wilderToUpdate.skill = [...wilderToUpdate.skill, skillToAdd]
             await dataSource
                 .getRepository(Wilder)
