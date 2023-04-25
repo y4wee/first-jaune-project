@@ -1,6 +1,7 @@
 const express = require("express");
 const dataSource = require("./utils").dataSource;
 const wilderController = require("./controller/wilder");
+const SkillController = require("./controller/skill");
 
 const app = express();
 
@@ -10,6 +11,11 @@ app.post("/api/wilder", wilderController.create);
 app.get("/api/wilder", wilderController.getAll);
 app.delete("/api/wilder", wilderController.deleteOne);
 app.put("/api/wilder", wilderController.updateOne);
+
+app.post("/api/skill", SkillController.create);
+app.get("/api/skill", SkillController.getAll);
+app.delete("/api/skill", SkillController.deleteOne);
+app.put("/api/skill", SkillController.updateOne);
 
 app.use((req, res, next) => {
     res.status(404).json({ message: "Resource not found" });
