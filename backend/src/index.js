@@ -1,9 +1,12 @@
 const express = require("express");
+const cors = require("cors");
 const dataSource = require("./utils").dataSource;
 const wilderController = require("./controller/wilder");
 const SkillController = require("./controller/skill");
 
 const app = express();
+
+app.use(cors());
 
 app.use(express.json());
 
@@ -25,7 +28,7 @@ app.use((req, res, next) => {
 
 const start = async () => {
     await dataSource.initialize();
-    app.listen(3000, () => console.log("Server started on 3000"));
+    app.listen(4000, () => console.log("Server started on 4000"));
 };
 //Start Server
 
