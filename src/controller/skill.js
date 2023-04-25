@@ -25,11 +25,11 @@ module.exports = {
     updateOne: async (req, res) => {
         try {
             const repository = dataSource.getRepository(Skill);
-            const user = await repository.findOneBy({
-                id: req.body.id,
+            const skill = await repository.findOneBy({
+                name: req.body.name,
             });
-            user.name = req.body.name;
-            await repository.save(user);
+            skill.name = req.body.name;
+            await repository.save(skill);
             res.send("Skill updated");
         } catch (error) {
             res.send(error);
@@ -39,11 +39,11 @@ module.exports = {
     deleteOne: async (req, res) => {
         try {
             const repository = dataSource.getRepository(Skill);
-            const user = await repository.findOneBy({
-                id: req.body.id,
+            const skill = await repository.findOneBy({
+                name: req.body.name,
             });
-            await repository.remove(user);
-            res.send("Skill : " + user.name + " removed");
+            await repository.remove(skill);
+            res.send("Skill : " + skill.name + " removed");
         } catch (error) {
             res.send(error);
         }
