@@ -18,7 +18,7 @@ module.exports = {
             const wilders = await repository.find();
             res.send(wilders);
         } catch (error) {
-            console.error(error);
+            res.send(error);
         }
     },
 
@@ -32,16 +32,20 @@ module.exports = {
             await repository.save(user);
             res.send("wilder updated");
         } catch (error) {
-            console.error(error);
+            res.send(error);
         }
     },
 
     deleteOne: async (req, res) => {
         try {
-            const wilders = await dataSource.getRepository(Wilder).find();
-            res.send(wilders);
+            const repository = dataSource.getRepository(Wilder);
+            const user = await repository.findOneBy({
+                id: req.body.id,
+            });
+            await repository.remove(user);
+            res.send("user : " + user.name + " removed");
         } catch (error) {
-            console.error(error);
+            res.send(error);
         }
     },
 };
