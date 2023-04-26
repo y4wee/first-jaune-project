@@ -2,24 +2,30 @@ import React, { useEffect, useState } from "react";
 import axios from "axios";
 import styles from "./Home.module.css";
 import Header from "../components/Header";
+import Footer from "../components/Footer";
 import Wilder from "../components/Wilder";
+import AddWilder from "../components/AddWilder";
 
 const Home = () => {
     const [wilders, setWilders] = useState([]);
 
     useEffect(() => {
-        axios
-            .get("http://localhost:4000/api/wilder")
-            .then((res) => {
+        const fetchData = async () => {
+            try {
+                const res = await axios.get("http://localhost:4000/api/wilder");
                 setWilders(res.data);
-            })
-            .catch((error) => {
+            } catch (error) {
                 console.error(error);
-            });
+            }
+        };
+
+        fetchData();
     }, []);
     return (
         <main className={styles.home}>
             <Header />
+
+            <AddWilder />
 
             <section className={styles.section}>
                 <h3>Wilders</h3>
@@ -31,6 +37,8 @@ const Home = () => {
                     ))}
                 </div>
             </section>
+
+            <Footer />
         </main>
     );
 };

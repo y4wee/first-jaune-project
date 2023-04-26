@@ -20,7 +20,6 @@ const Wilder = (props) => {
                     <Skill key={skill.id} name={skill.name} />
                 ))}
             </ul>
-            <Skill />
         </article>
     );
 };
