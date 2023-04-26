@@ -1,5 +1,6 @@
 import React from "react";
 import axios from "axios";
+import PropTypes from "prop-types";
 import styles from "./Wilder.module.css";
 import Skill from "./Skill";
 import blank_pic from "../assets/blank.png";
@@ -36,6 +37,12 @@ const Wilder = (props) => {
             </div>
         </article>
     );
+};
+
+Wilder.propTypes = {
+    wilder: PropTypes.object.isRequired,
+    name: PropTypes.string,
+    skills: PropTypes.array,
 };
 
 export default Wilder;

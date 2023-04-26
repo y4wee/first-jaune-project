@@ -1,5 +1,6 @@
 import React, { useState } from "react";
 import axios from "axios";
+import styles from "./AddWilder.module.css";
 
 const AddWilder = () => {
     const [name, setName] = useState("");
@@ -18,9 +19,11 @@ const AddWilder = () => {
     };
     return (
         <div>
-            <form onSubmit={submitHandler}>
-                <label>Name</label>
-                <input type="text" value={name} onChange={changeHandler} />
+            <form onSubmit={submitHandler} className={styles.form}>
+                <div className={styles.input}>
+                    <label>Name </label>
+                    <input type="text" value={name} onChange={changeHandler} />
+                </div>
                 <button>ADD</button>
             </form>
         </div>
