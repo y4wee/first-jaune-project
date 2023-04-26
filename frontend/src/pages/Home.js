@@ -1,5 +1,6 @@
 import React, { useEffect, useState } from "react";
 import axios from "axios";
+import PropTypes from "prop-types";
 import styles from "./Home.module.css";
 import Header from "../components/Header";
 import Footer from "../components/Footer";
@@ -32,7 +33,11 @@ const Home = () => {
                 <div className={styles.grid}>
                     {wilders?.map((wilder) => (
                         <div className={styles.container} key={wilder.id}>
-                            <Wilder wilder={wilder} />
+                            <Wilder
+                                name={wilder.name}
+                                skills={wilder.skill}
+                                id={wilder.id}
+                            />
                         </div>
                     ))}
                 </div>
@@ -41,6 +46,13 @@ const Home = () => {
             <Footer />
         </main>
     );
+};
+
+Home.propTypes = {
+    wilders: PropTypes.array,
+    id: PropTypes.number,
+    name: PropTypes.string,
+    skills: PropTypes.array,
 };
 
 export default Home;

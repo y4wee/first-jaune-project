@@ -1,10 +1,10 @@
 import React from "react";
 import styles from "./Skill.module.css";
 
-const Skill = (props) => {
+const Skill = ({name}) => {
     return (
         <li>
-            {props.name}
+            {name}
             <span className={styles.votes}>
                 {Math.floor(Math.random() * 6) + 1}
             </span>
