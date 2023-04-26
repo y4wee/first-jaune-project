@@ -1,4 +1,5 @@
 .card {
+    position: relative;
     padding: 20px;
     border: 1px solid #c9c9c9;
     border-radius: 7px;
@@ -56,4 +57,27 @@
     border: #F76C6C 1px solid;
     border-radius: 4px;
     padding: 2px;
+}
+
+.delete {
+    position: absolute;
+    top: 5px;
+    right: 5px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 25px;
+    height: 25px;
+    background-color: #F76C6C;
+    border-radius: 50%;
+    font-weight: bolder;
+    clip-path: circle(0% at 50% 50%);
+    transition: all 0.3s ease-in-out;
+    cursor: pointer;
+    user-select: none;
+}
+
+.card:hover .delete {
+    clip-path: circle(100% at 50% 50%);
+    transition: all 0.3s ease-in-out;
 }

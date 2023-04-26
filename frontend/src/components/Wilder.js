@@ -1,9 +1,17 @@
 import React from "react";
+import axios from "axios";
 import styles from "./Wilder.module.css";
 import Skill from "./Skill";
 import blank_pic from "../assets/blank.png";
 
 const Wilder = (props) => {
+    const deleteHandler = (id) => {
+        if (id) {
+            axios.delete("http://localhost:4000/api/wilder", {
+                id: id,
+            });
+        }
+    };
     return (
         <article className={styles.card}>
             <img src={blank_pic} alt="wilder" />
@@ -20,6 +28,12 @@ const Wilder = (props) => {
                     <Skill key={skill.id} name={skill.name} />
                 ))}
             </ul>
+            <div
+                className={styles.delete}
+                onClick={() => deleteHandler(props.wilder.id)}
+            >
+                X
+            </div>
         </article>
     );
 };
