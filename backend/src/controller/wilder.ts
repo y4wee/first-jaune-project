@@ -1,9 +1,10 @@
-const dataSource = require("../utils").dataSource;
-const Wilder = require("../entity/Wilder");
-const Skill = require("../entity/Skill");
+import { Request, Response } from "express";
+import { dataSource } from "../utils";
+import { Wilder } from "../entity/Wilder";
+import { Skill } from "../entity/Skill";
 
-module.exports = {
-    create: async (req, res) => {
+export const wilderController = {
+    create: async (req: Request, res: Response) => {
         try {
             const repository = dataSource.getRepository(Wilder);
             await repository.save(req.body);
@@ -13,7 +14,7 @@ module.exports = {
         }
     },
 
-    getAll: async (req, res) => {
+    getAll: async (req: Request, res: Response) => {
         try {
             const repository = dataSource.getRepository(Wilder);
             const wilders = await repository.find();
@@ -23,10 +24,10 @@ module.exports = {
         }
     },
 
-    updateOne: async (req, res) => {
+    updateOne: async (req: Request, res: Response) => {
         try {
             const repository = dataSource.getRepository(Wilder);
-            const user = await repository.findOneBy({
+            const user = await repository.findOneByOrFail({
                 id: req.body.id,
             });
             user.name = req.body.name;
@@ -37,10 +38,10 @@ module.exports = {
         }
     },
 
-    deleteOne: async (req, res) => {
+    deleteOne: async (req: Request, res: Response) => {
         try {
             const repository = dataSource.getRepository(Wilder);
-            const user = await repository.findOneBy({
+            const user = await repository.findOneByOrFail({
                 id: req.body.id,
             });
             await repository.remove(user);
@@ -50,19 +51,17 @@ module.exports = {
         }
     },
 
-    addSkill: async (req, res) => {
+    addSkill: async (req: Request, res: Response) => {
         try {
             const wilderToUpdate = await dataSource
                 .getRepository(Wilder)
-                .findOneBy({ id: req.body.wilderId });
+                .findOneByOrFail({ id: req.body.wilderId });
             const skillToAdd = await dataSource
                 .getRepository(Skill)
-                .findOneBy({ name: req.body.skillName });
-            wilderToUpdate.skill = [...wilderToUpdate.skill, skillToAdd]
-            await dataSource
-                .getRepository(Wilder)
-                .save(wilderToUpdate);
-            res.send("skill added")
+                .findOneByOrFail({ name: req.body.skillName });
+            wilderToUpdate.skills = [...wilderToUpdate.skills, skillToAdd];
+            await dataSource.getRepository(Wilder).save(wilderToUpdate);
+            res.send("skill added");
         } catch (error) {
             res.send(error);
         }

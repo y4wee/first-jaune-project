@@ -1,8 +1,8 @@
-const express = require("express");
-const cors = require("cors");
-const dataSource = require("./utils").dataSource;
-const wilderController = require("./controller/wilder");
-const SkillController = require("./controller/skill");
+import express from "express";
+import cors from "cors";
+import { dataSource } from "./utils";
+import { wilderController } from "./controller/wilder";
+import { SkillController } from "./controller/skill";
 
 const app = express();
 

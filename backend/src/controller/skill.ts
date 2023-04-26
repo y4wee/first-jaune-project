@@ -1,8 +1,9 @@
-const dataSource = require("../utils").dataSource;
-const Skill = require("../entity/Skill");
+import { Request, Response } from "express";
+import { dataSource } from "../utils";
+import { Skill } from "../entity/Skill";
 
-module.exports = {
-    create: async (req, res) => {
+export const SkillController = {
+    create: async (req: Request, res: Response) => {
         try {
             const repository = dataSource.getRepository(Skill);
             await repository.save(req.body);
@@ -12,7 +13,7 @@ module.exports = {
         }
     },
 
-    getAll: async (req, res) => {
+    getAll: async (req: Request, res: Response) => {
         try {
             const repository = dataSource.getRepository(Skill);
             const Skills = await repository.find();
@@ -22,10 +23,10 @@ module.exports = {
         }
     },
 
-    updateOne: async (req, res) => {
+    updateOne: async (req: Request, res: Response) => {
         try {
             const repository = dataSource.getRepository(Skill);
-            const skill = await repository.findOneBy({
+            const skill = await repository.findOneByOrFail({
                 name: req.body.name,
             });
             skill.name = req.body.name;
@@ -36,10 +37,10 @@ module.exports = {
         }
     },
 
-    deleteOne: async (req, res) => {
+    deleteOne: async (req: Request, res: Response) => {
         try {
             const repository = dataSource.getRepository(Skill);
-            const skill = await repository.findOneBy({
+            const skill = await repository.findOneByOrFail({
                 name: req.body.name,
             });
             await repository.remove(skill);
