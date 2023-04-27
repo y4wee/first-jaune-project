@@ -1,10 +1,10 @@
-import { Request, Response } from "express";
 import { dataSource } from "../utils";
 import { Wilder } from "../entity/Wilder";
 import { Skill } from "../entity/Skill";
+import { Icontroller } from "../types/interface";
 
-export const wilderController = {
-    create: async (req: Request, res: Response) => {
+export const wilderController: Icontroller = {
+    create: async (req, res) => {
         try {
             const repository = dataSource.getRepository(Wilder);
             await repository.save(req.body);
@@ -14,7 +14,7 @@ export const wilderController = {
         }
     },
 
-    getAll: async (req: Request, res: Response) => {
+    getAll: async (req, res) => {
         try {
             const repository = dataSource.getRepository(Wilder);
             const wilders = await repository.find();
@@ -24,7 +24,7 @@ export const wilderController = {
         }
     },
 
-    updateOne: async (req: Request, res: Response) => {
+    updateOne: async (req, res) => {
         try {
             const repository = dataSource.getRepository(Wilder);
             const user = await repository.findOneByOrFail({
@@ -38,7 +38,7 @@ export const wilderController = {
         }
     },
 
-    deleteOne: async (req: Request, res: Response) => {
+    deleteOne: async (req, res) => {
         try {
             const repository = dataSource.getRepository(Wilder);
             const user = await repository.findOneByOrFail({
@@ -51,7 +51,7 @@ export const wilderController = {
         }
     },
 
-    addSkill: async (req: Request, res: Response) => {
+    addSkill: async (req, res) => {
         try {
             const wilderToUpdate = await dataSource
                 .getRepository(Wilder)

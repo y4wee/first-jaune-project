@@ -1,9 +1,9 @@
-import { Request, Response } from "express";
 import { dataSource } from "../utils";
 import { Skill } from "../entity/Skill";
+import { Icontroller } from "../types/interface";
 
-export const SkillController = {
-    create: async (req: Request, res: Response) => {
+export const SkillController: Icontroller = {
+    create: async (req, res) => {
         try {
             const repository = dataSource.getRepository(Skill);
             await repository.save(req.body);
@@ -13,7 +13,7 @@ export const SkillController = {
         }
     },
 
-    getAll: async (req: Request, res: Response) => {
+    getAll: async (req, res) => {
         try {
             const repository = dataSource.getRepository(Skill);
             const Skills = await repository.find();
@@ -23,7 +23,7 @@ export const SkillController = {
         }
     },
 
-    updateOne: async (req: Request, res: Response) => {
+    updateOne: async (req, res) => {
         try {
             const repository = dataSource.getRepository(Skill);
             const skill = await repository.findOneByOrFail({
@@ -37,7 +37,7 @@ export const SkillController = {
         }
     },
 
-    deleteOne: async (req: Request, res: Response) => {
+    deleteOne: async (req, res) => {
         try {
             const repository = dataSource.getRepository(Skill);
             const skill = await repository.findOneByOrFail({

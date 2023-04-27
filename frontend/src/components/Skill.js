@@ -1,7 +1,7 @@
 import React from "react";
 import styles from "./Skill.module.css";
 
-const Skill = ({name}) => {
+const Skill = ({ name }) => {
     return (
         <li>
             {name}

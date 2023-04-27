@@ -4,7 +4,7 @@ import styles from "./Wilder.module.css";
 import Skill from "./Skill";
 import blank_pic from "../assets/blank.png";
 
-const Wilder = ({id, name, skills}) => {
+const Wilder = ({ id, name, skills }) => {
     const deleteHandler = (id) => {
         if (id) {
             axios.delete("http://localhost:4000/api/wilder", {
@@ -28,10 +28,7 @@ const Wilder = ({id, name, skills}) => {
                     <Skill key={skill.id} name={skill.name} />
                 ))}
             </ul>
-            <div
-                className={styles.delete}
-                onClick={() => deleteHandler(id)}
-            >
+            <div className={styles.delete} onClick={() => deleteHandler(id)}>
                 X
             </div>
         </article>
