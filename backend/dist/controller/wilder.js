@@ -27,7 +27,11 @@ exports.wilderController = {
     getAll: (req, res) => __awaiter(void 0, void 0, void 0, function* () {
         try {
             const repository = utils_1.dataSource.getRepository(Wilder_1.Wilder);
-            const wilders = yield repository.find();
+            const wilders = yield repository.find({
+                relations: {
+                    skills: true,
+                },
+            });
             res.send(wilders);
         }
         catch (error) {
@@ -65,7 +69,12 @@ exports.wilderController = {
         try {
             const wilderToUpdate = yield utils_1.dataSource
                 .getRepository(Wilder_1.Wilder)
-                .findOneByOrFail({ id: req.body.wilderId });
+                .findOneOrFail({
+                where: {
+                    id: req.body.wilderId,
+                },
+                relations: ["skills"],
+            });
             const skillToAdd = yield utils_1.dataSource
                 .getRepository(Skill_1.Skill)
                 .findOneByOrFail({ name: req.body.skillName });

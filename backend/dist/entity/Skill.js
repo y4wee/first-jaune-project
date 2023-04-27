@@ -21,6 +21,10 @@ __decorate([
     (0, typeorm_1.Column)({ unique: true }),
     __metadata("design:type", String)
 ], Skill.prototype, "name", void 0);
+__decorate([
+    (0, typeorm_1.Column)({ nullable: true, default: 0 }),
+    __metadata("design:type", Number)
+], Skill.prototype, "vote", void 0);
 Skill = __decorate([
     (0, typeorm_1.Entity)()
 ], Skill);
