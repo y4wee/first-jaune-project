@@ -1,10 +1,10 @@
 import axios, { AxiosRequestConfig } from "axios";
 import styles from "../styles/Wilder.module.css";
 import Skill from "./Skill";
-import { Iwilder, Iskill } from "../interfaces/all";
+import { IpropsWilder, Iskill } from "../interfaces/all";
 import blank_pic from "../assets/blank.png";
 
-const Wilder = ({ id, name, skills, city }: Iwilder) => {
+const Wilder = ({ id, name, skills, city, onchangeWilder }: IpropsWilder) => {
   const deleteHandler = async (id: number): Promise<void> => {
     if (id) {
       try {
@@ -14,7 +14,7 @@ const Wilder = ({ id, name, skills, city }: Iwilder) => {
           data: { id: id },
         };
         await axios(config);
-        console.log("deleted");
+        onchangeWilder();
       } catch (error) {
         console.error(error);
       }

@@ -1,17 +1,15 @@
 import { useState, ChangeEvent, FormEvent } from "react";
 import axios, { AxiosRequestConfig } from "axios";
 import styles from "../styles/AddWilder.module.css";
-import { Iwilder } from "../interfaces/all";
+import { Iwilder, IpropsAddWilder } from "../interfaces/all";
 
-const AddWilder = () => {
+const AddWilder = ({ onchangeWilder }: IpropsAddWilder) => {
   const [wilder, setWilder] = useState<Iwilder>({
     name: "",
     city: "",
   });
 
-  const submitHandler = async (
-    e: FormEvent<HTMLFormElement>
-  ): Promise<void> => {
+  const handleSubmit = async (e: FormEvent<HTMLFormElement>): Promise<void> => {
     e.preventDefault();
     if (wilder.name.length > 0 && wilder.city.length > 0) {
       try {
@@ -22,27 +20,28 @@ const AddWilder = () => {
         };
         await axios(config);
         setWilder({ name: "", city: "" });
+        onchangeWilder();
       } catch (error) {
         console.error(error);
       }
     }
   };
-  const cityChangeHandler = (e: ChangeEvent<HTMLInputElement>) => {
+  const handleCityChange = (e: ChangeEvent<HTMLInputElement>) => {
     setWilder((wilder) => ({ ...wilder, city: e.target.value.toLowerCase() }));
   };
-  const nameChangeHandler = (e: ChangeEvent<HTMLInputElement>) => {
+  const handleNameChange = (e: ChangeEvent<HTMLInputElement>) => {
     setWilder((wilder) => ({ ...wilder, name: e.target.value.toLowerCase() }));
   };
   return (
     <div>
-      <form onSubmit={submitHandler} className={styles.form}>
+      <form onSubmit={handleSubmit} className={styles.form}>
         <div className={styles.input}>
           <label>Name </label>
-          <input type="text" value={wilder.name} onChange={nameChangeHandler} />
+          <input type="text" value={wilder.name} onChange={handleNameChange} />
         </div>
         <div className={styles.input}>
           <label>City </label>
-          <input type="text" value={wilder.city} onChange={cityChangeHandler} />
+          <input type="text" value={wilder.city} onChange={handleCityChange} />
         </div>
         <button>ADD</button>
       </form>

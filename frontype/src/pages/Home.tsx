@@ -10,25 +10,27 @@ import AddWilder from "../components/AddWilder";
 const Home = () => {
   const [wilders, setWilders] = useState<Iwilder[]>([]);
 
-  const fetchData = async (): Promise<void> => {
+  const getWilders = async (): Promise<void> => {
     try {
       const res = await axios.get("http://localhost:4000/api/wilder");
       res && setWilders(res.data);
-      console.log("API call");
     } catch (error) {
       console.error(error);
     }
   };
 
   useEffect(() => {
-    fetchData();
+    getWilders();
   }, []);
 
+  const updateWilders = (): void => {
+    getWilders();
+  };
   return (
     <main className={styles.home}>
       <Header />
 
-      <AddWilder />
+      <AddWilder onchangeWilder={updateWilders} />
 
       <section className={styles.section}>
         <h3>Wilders</h3>
@@ -40,6 +42,7 @@ const Home = () => {
                 skills={wilder.skills}
                 id={wilder.id}
                 city={wilder.city}
+                onchangeWilder={updateWilders}
               />
             </div>
           ))}

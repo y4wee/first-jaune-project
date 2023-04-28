@@ -9,3 +9,11 @@ export interface Iwilder {
   city: string;
   skills?: Iskill[];
 }
+
+export interface IpropsAddWilder {
+  onchangeWilder: () => void;
+}
+
+export interface IpropsWilder extends Iwilder {
+  onchangeWilder: () => void;
+}
