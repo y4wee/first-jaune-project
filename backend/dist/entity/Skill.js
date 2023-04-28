@@ -11,6 +11,7 @@ var __metadata = (this && this.__metadata) || function (k, v) {
 Object.defineProperty(exports, "__esModule", { value: true });
 exports.Skill = void 0;
 const typeorm_1 = require("typeorm");
+const Wilder_1 = require("./Wilder");
 let Skill = class Skill {
 };
 __decorate([
@@ -18,13 +19,17 @@ __decorate([
     __metadata("design:type", Number)
 ], Skill.prototype, "id", void 0);
 __decorate([
-    (0, typeorm_1.Column)({ unique: true }),
+    (0, typeorm_1.Column)(),
     __metadata("design:type", String)
 ], Skill.prototype, "name", void 0);
 __decorate([
-    (0, typeorm_1.Column)({ nullable: true, default: 0 }),
+    (0, typeorm_1.Column)({ default: 0 }),
     __metadata("design:type", Number)
-], Skill.prototype, "vote", void 0);
+], Skill.prototype, "grade", void 0);
+__decorate([
+    (0, typeorm_1.ManyToOne)(() => Wilder_1.Wilder, { cascade: true }),
+    __metadata("design:type", Wilder_1.Wilder)
+], Skill.prototype, "wilder", void 0);
 Skill = __decorate([
     (0, typeorm_1.Entity)()
 ], Skill);

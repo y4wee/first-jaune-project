@@ -12,7 +12,6 @@ Object.defineProperty(exports, "__esModule", { value: true });
 exports.wilderController = void 0;
 const utils_1 = require("../utils");
 const Wilder_1 = require("../entity/Wilder");
-const Skill_1 = require("../entity/Skill");
 exports.wilderController = {
     create: (req, res) => __awaiter(void 0, void 0, void 0, function* () {
         try {
@@ -27,11 +26,7 @@ exports.wilderController = {
     getAll: (req, res) => __awaiter(void 0, void 0, void 0, function* () {
         try {
             const repository = utils_1.dataSource.getRepository(Wilder_1.Wilder);
-            const wilders = yield repository.find({
-                relations: {
-                    skills: true,
-                },
-            });
+            const wilders = yield repository.find();
             res.send(wilders);
         }
         catch (error) {
@@ -60,27 +55,6 @@ exports.wilderController = {
             });
             yield repository.remove(user);
             res.send("user : " + user.name + " removed");
-        }
-        catch (error) {
-            res.send(error);
-        }
-    }),
-    addSkill: (req, res) => __awaiter(void 0, void 0, void 0, function* () {
-        try {
-            const wilderToUpdate = yield utils_1.dataSource
-                .getRepository(Wilder_1.Wilder)
-                .findOneOrFail({
-                where: {
-                    id: req.body.wilderId,
-                },
-                relations: ["skills"],
-            });
-            const skillToAdd = yield utils_1.dataSource
-                .getRepository(Skill_1.Skill)
-                .findOneByOrFail({ name: req.body.skillName });
-            wilderToUpdate.skills = [...wilderToUpdate.skills, skillToAdd];
-            yield utils_1.dataSource.getRepository(Wilder_1.Wilder).save(wilderToUpdate);
-            res.send("skill added");
         }
         catch (error) {
             res.send(error);

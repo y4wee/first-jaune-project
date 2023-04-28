@@ -16,8 +16,8 @@ exports.SkillController = {
     create: (req, res) => __awaiter(void 0, void 0, void 0, function* () {
         try {
             const repository = utils_1.dataSource.getRepository(Skill_1.Skill);
-            yield repository.save(req.body);
-            res.send("Created Skill");
+            const response = yield repository.save(req.body);
+            res.send("Created Skill : " + response.name);
         }
         catch (error) {
             res.send("Error while creating Skill : " + error);
@@ -37,9 +37,10 @@ exports.SkillController = {
         try {
             const repository = utils_1.dataSource.getRepository(Skill_1.Skill);
             const skill = yield repository.findOneByOrFail({
-                name: req.body.name,
+                id: req.body.id,
             });
             skill.name = req.body.name;
+            skill.grade = req.body.grade;
             yield repository.save(skill);
             res.send("Skill updated");
         }
@@ -51,7 +52,7 @@ exports.SkillController = {
         try {
             const repository = utils_1.dataSource.getRepository(Skill_1.Skill);
             const skill = yield repository.findOneByOrFail({
-                name: req.body.name,
+                id: req.body.id,
             });
             yield repository.remove(skill);
             res.send("Skill : " + skill.name + " removed");

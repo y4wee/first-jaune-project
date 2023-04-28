@@ -28,7 +28,6 @@ app.post("/api/skill", skill_1.SkillController.create);
 app.get("/api/skill", skill_1.SkillController.getAll);
 app.delete("/api/skill", skill_1.SkillController.deleteOne);
 app.put("/api/skill", skill_1.SkillController.updateOne);
-app.put("/api/wilder/addskill", wilder_1.wilderController.addSkill);
 app.use((req, res, next) => {
     res.status(404).json({ message: "Resource not found" });
 });

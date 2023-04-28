@@ -1,6 +1,5 @@
 import { dataSource } from "../utils";
 import { Wilder } from "../entity/Wilder";
-import { Skill } from "../entity/Skill";
 import { Icontroller } from "../types/interface";
 
 export const wilderController: Icontroller = {
@@ -17,11 +16,7 @@ export const wilderController: Icontroller = {
   getAll: async (req, res) => {
     try {
       const repository = dataSource.getRepository(Wilder);
-      const wilders = await repository.find({
-        relations: {
-          skills: true,
-        },
-      });
+      const wilders = await repository.find();
       res.send(wilders);
     } catch (error) {
       res.send(error);
@@ -50,27 +45,6 @@ export const wilderController: Icontroller = {
       });
       await repository.remove(user);
       res.send("user : " + user.name + " removed");
-    } catch (error) {
-      res.send(error);
-    }
-  },
-
-  addSkill: async (req, res) => {
-    try {
-      const wilderToUpdate = await dataSource
-        .getRepository(Wilder)
-        .findOneOrFail({
-          where: {
-            id: req.body.wilderId,
-          },
-          relations: ["skills"],
-        });
-      const skillToAdd = await dataSource
-        .getRepository(Skill)
-        .findOneByOrFail({ name: req.body.skillName });
-      wilderToUpdate.skills = [...wilderToUpdate.skills, skillToAdd];
-      await dataSource.getRepository(Wilder).save(wilderToUpdate);
-      res.send("skill added");
     } catch (error) {
       res.send(error);
     }

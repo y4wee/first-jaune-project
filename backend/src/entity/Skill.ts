@@ -1,13 +1,17 @@
-import { Entity, PrimaryGeneratedColumn, Column } from "typeorm";
+import { Entity, PrimaryGeneratedColumn, Column, ManyToOne } from "typeorm";
+import { Wilder } from "./Wilder";
 
 @Entity()
 export class Skill {
   @PrimaryGeneratedColumn()
   id: number;
 
-  @Column({ unique: true })
+  @Column()
   name: string;
 
-  @Column({ nullable: true, default: 0 })
-  vote: number;
+  @Column({ default: 0 })
+  grade: number;
+
+  @ManyToOne(() => Wilder, { cascade: true })
+  wilder: Wilder;
 }

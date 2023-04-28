@@ -9,29 +9,29 @@ var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
 Object.defineProperty(exports, "__esModule", { value: true });
-exports.Wilder = void 0;
+exports.Vote = void 0;
 const typeorm_1 = require("typeorm");
 const Skill_1 = require("./Skill");
-let Wilder = class Wilder {
+const Wilder_1 = require("./Wilder");
+let Vote = class Vote {
 };
 __decorate([
     (0, typeorm_1.PrimaryGeneratedColumn)(),
     __metadata("design:type", Number)
-], Wilder.prototype, "id", void 0);
+], Vote.prototype, "id", void 0);
 __decorate([
-    (0, typeorm_1.Column)(),
-    __metadata("design:type", String)
-], Wilder.prototype, "name", void 0);
+    (0, typeorm_1.Column)({ nullable: true, default: 0 }),
+    __metadata("design:type", Number)
+], Vote.prototype, "qantity", void 0);
 __decorate([
-    (0, typeorm_1.Column)({ nullable: true }),
-    __metadata("design:type", String)
-], Wilder.prototype, "city", void 0);
+    (0, typeorm_1.ManyToOne)(() => Skill_1.Skill),
+    __metadata("design:type", Skill_1.Skill)
+], Vote.prototype, "skill", void 0);
 __decorate([
-    (0, typeorm_1.OneToMany)(() => Skill_1.Skill, (skill) => skill.wilder, { eager: true }),
-    (0, typeorm_1.JoinTable)(),
-    __metadata("design:type", Array)
-], Wilder.prototype, "skills", void 0);
-Wilder = __decorate([
+    (0, typeorm_1.ManyToOne)(() => Wilder_1.Wilder),
+    __metadata("design:type", Wilder_1.Wilder)
+], Vote.prototype, "wilder", void 0);
+Vote = __decorate([
     (0, typeorm_1.Entity)()
-], Wilder);
-exports.Wilder = Wilder;
+], Vote);
+exports.Vote = Vote;
