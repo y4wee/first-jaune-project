@@ -24,7 +24,7 @@ const Wilder = ({ id, name, skills }) => {
       </p>
       <h4>Wild Skills</h4>
       <ul className={styles.skills}>
-        {skills.map((skill) => (
+        {skills?.map((skill) => (
           <Skill key={skill.id} name={skill.name} />
         ))}
       </ul>
