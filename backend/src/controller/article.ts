@@ -19,6 +19,8 @@ export const ArticleController: IcontrollerArticle = {
       article.wilder = wilder;
       article.wilderName = wilder.name;
 
+      console.log(article)
+
       await repository.save(article);
       res.send("new article posted : " + article.title);
     } catch (error) {

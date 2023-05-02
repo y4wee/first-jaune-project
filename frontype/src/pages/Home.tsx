@@ -5,7 +5,7 @@ import { Iarticle } from "../interfaces/article";
 import styles from "../styles/Home.module.css";
 import Footer from "../components/Footer";
 import Header from "../components/Header";
-import AddPost from "../components/form/AddPost";
+import AddArticle from "../components/form/AddArticle";
 
 const Home = () => {
   const [articles, setArticles] = useState<Iarticle[]>([]);
@@ -32,7 +32,7 @@ const Home = () => {
     <div>
       <Header />
       <h1>Home</h1>
-      <AddPost onChangeArticle={updatearticles}/>
+      <AddArticle onChangeArticle={updatearticles} />
       <Footer />
     </div>
   );

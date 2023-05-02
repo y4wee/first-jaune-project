@@ -2,13 +2,13 @@ import { useState, ChangeEvent, FormEvent } from "react";
 import axios, { AxiosRequestConfig } from "axios";
 
 import { Iarticle, IpropsChangeArticle } from "../../interfaces/article";
-import styles from "../../styles/AddPost.module.css";
+import styles from "../../styles/AddArticle.module.css";
 
 const AddPost = ({ onChangeArticle }: IpropsChangeArticle) => {
   const [article, setArticle] = useState<Iarticle>({
     title: "",
     content: "",
-    wilder: 4,
+    wilder: 2,
   });
 
   const handleSubmit = async (e: FormEvent<HTMLFormElement>): Promise<void> => {
@@ -24,11 +24,12 @@ const AddPost = ({ onChangeArticle }: IpropsChangeArticle) => {
           url: "http://localhost:4000/api/article",
           data: article,
         };
-        await axios(config);
+        const res = await axios(config);
+        console.log(res.data);
         setArticle({
           title: "",
           content: "",
-          wilder: 4,
+          wilder: 2,
         });
         onChangeArticle();
       } catch (error) {

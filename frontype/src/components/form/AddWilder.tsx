@@ -29,11 +29,11 @@ const AddWilder = ({ onchangeWilder }: IpropsChangeWilder) => {
   };
 
   const handleCityChange = (e: ChangeEvent<HTMLInputElement>) => {
-    setWilder((wilder) => ({ ...wilder, city: e.target.value.toLowerCase() }));
+    setWilder((wilder) => ({ ...wilder, city: e.target.value }));
   };
 
   const handleNameChange = (e: ChangeEvent<HTMLInputElement>) => {
-    setWilder((wilder) => ({ ...wilder, name: e.target.value.toLowerCase() }));
+    setWilder((wilder) => ({ ...wilder, name: e.target.value }));
   };
 
   return (
