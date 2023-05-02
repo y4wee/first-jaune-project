@@ -5,7 +5,7 @@ import Header from "../components/Header";
 import Footer from "../components/Footer";
 import Wilder from "../components/Wilder";
 import { Iwilder } from "../interfaces/all";
-import AddWilder from "../components/AddWilder";
+import Form from "../components/Form";
 
 const Home = () => {
   const [wilders, setWilders] = useState<Iwilder[]>([]);
@@ -30,7 +30,7 @@ const Home = () => {
     <main className={styles.home}>
       <Header />
 
-      <AddWilder onchangeWilder={updateWilders} />
+      <Form onchangeWilder={updateWilders} wilders={wilders}/>
 
       <section className={styles.section}>
         <h3>Wilders</h3>

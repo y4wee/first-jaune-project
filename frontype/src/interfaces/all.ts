@@ -2,6 +2,7 @@ export interface Iskill {
   id?: number;
   name: string;
   grade: number;
+  wilder?: number;
 }
 
 export interface Iwilder {
@@ -12,10 +13,15 @@ export interface Iwilder {
   skills?: Iskill[];
 }
 
-export interface IpropsAddWilder {
+export interface IpropsChangeWilder {
   onchangeWilder: () => void;
 }
 
 export interface IpropsWilder extends Iwilder {
+  onchangeWilder: () => void;
+}
+
+export interface Iform {
+  wilders: Iwilder[];
   onchangeWilder: () => void;
 }
