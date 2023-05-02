@@ -1,21 +1,16 @@
 import { dataSource } from "../utils";
 import { Skill } from "../entity/Skill";
-import { Wilder } from "../entity/Wilder";
 import { IcontrollerSkill } from "../interfaces/skill";
 
 export const SkillController: IcontrollerSkill = {
   create: async (req, res) => {
     try {
       const repository = dataSource.getRepository(Skill);
-      const repositoryWilder = dataSource.getRepository(Wilder);
-      const wilder = await repositoryWilder.findOneByOrFail({
-        id: req.body.wilder,
-      });
 
       const skill = new Skill();
       skill.name = req.body.name;
       skill.grade = req.body.grade;
-      skill.wilder = wilder;
+      skill.wilder = req.body.wilder;
 
       await repository.save(skill);
       res.send("Added Skill : " + skill.name);
@@ -24,7 +19,7 @@ export const SkillController: IcontrollerSkill = {
     }
   },
 
-  getAllSkillNames: async (req, res) => {
+  getAllNames: async (req, res) => {
     try {
       const repository = dataSource.getRepository(Skill);
       const skillNames = await repository
