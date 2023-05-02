@@ -22,7 +22,7 @@ const Form = ({ wilders, onchangeWilder }: Iform) => {
         }
       >
         <AddWilder onchangeWilder={onchangeWilder} />
-        <AddSkill onchangeWilder={onchangeWilder} wilders={wilders}/>
+        <AddSkill onchangeWilder={onchangeWilder} wilders={wilders} />
         <div className={styles.close} onClick={() => setFormOn(false)}>
           X
         </div>
