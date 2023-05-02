@@ -42,6 +42,7 @@ const Home = () => {
                 skills={wilder.skills}
                 id={wilder.id}
                 city={wilder.city}
+                description={wilder.description}
                 onchangeWilder={updateWilders}
               />
             </div>
