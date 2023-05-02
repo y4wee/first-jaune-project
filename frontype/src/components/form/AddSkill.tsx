@@ -20,12 +20,13 @@ const AddSkill = ({ wilders, onchangeWilder }: Iform) => {
           url: "http://localhost:4000/api/skill",
           data: skill,
         };
-        await axios(config);
+        const res = await axios(config);
         setSkill({
           name: "",
           grade: 0,
           wilder: NaN,
         });
+        console.log(res.data);
         onchangeWilder();
       } catch (error) {
         console.error(error);
