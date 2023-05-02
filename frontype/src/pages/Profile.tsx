@@ -1,10 +1,11 @@
 import { useEffect, useState } from "react";
 import axios from "axios";
+
+import { Iwilder } from "../interfaces/all";
 import styles from "../styles/Profile.module.css";
 import Header from "../components/Header";
 import Footer from "../components/Footer";
 import Wilder from "../components/Wilder";
-import { Iwilder } from "../interfaces/all";
 import Form from "../components/Form";
 
 const Profile = () => {
@@ -30,7 +31,7 @@ const Profile = () => {
     <main className={styles.home}>
       <Header />
 
-      <Form onchangeWilder={updateWilders} wilders={wilders}/>
+      <Form onchangeWilder={updateWilders} wilders={wilders} />
 
       <section className={styles.section}>
         <h3>Wilders</h3>

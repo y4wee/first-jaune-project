@@ -10,7 +10,7 @@ export const CommentController: IcontrollerComment = {
       const comment = new Comment();
       comment.content = req.body.content;
       comment.wilder = req.body.wilder;
-      comment.post = req.body.post;
+      comment.article = req.body.post;
 
       await repository.save(comment);
       res.send("new comment posted");

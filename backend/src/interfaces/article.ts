@@ -1,5 +1,4 @@
 import { Request, Response } from "express";
-import { Wilder } from "../entity/Wilder";
 
 interface ItypedRequestBody<T> extends Request {
   body: T;
@@ -8,7 +7,7 @@ interface ItypedRequestBody<T> extends Request {
 interface IcreatePost {
   title: string;
   content: string;
-  wilder: Wilder;
+  wilder: number;
 }
 
 interface IgetOnePost {
@@ -25,7 +24,7 @@ interface IdeletePost {
   id: number;
 }
 
-export interface IcontrollerPost {
+export interface IcontrollerArticle {
   create(req: ItypedRequestBody<IcreatePost>, res: Response): Promise<void>;
   getAll(req: Request, res: Response): Promise<void>;
   getOne(req: ItypedRequestBody<IgetOnePost>, res: Response): Promise<void>;

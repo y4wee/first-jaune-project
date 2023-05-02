@@ -1,9 +1,9 @@
 import express from "express";
 import cors from "cors";
 import { dataSource } from "./utils";
-import { wilderController } from "./controller/wilder";
+import { WilderController } from "./controller/wilder";
 import { SkillController } from "./controller/skill";
-import { PostController } from "./controller/post";
+import { ArticleController } from "./controller/article";
 import { CommentController } from "./controller/comment";
 
 const app = express();
@@ -12,25 +12,25 @@ app.use(cors());
 
 app.use(express.json());
 
-app.post("/api/wilder", wilderController.create);
-app.get("/api/wilder", wilderController.getAll);
-app.put("/api/wilder", wilderController.updateOne);
-app.delete("/api/wilder", wilderController.deleteOne);
+app.post("/api/wilder", WilderController.create);
+app.get("/api/wilder", WilderController.getAll);
+app.put("/api/wilder", WilderController.updateOne);
+app.delete("/api/wilder", WilderController.deleteOne);
 
 app.post("/api/skill", SkillController.create);
 app.get("/api/skill/names", SkillController.getAllNames);
 app.put("/api/skill", SkillController.updateOne);
 app.delete("/api/skill", SkillController.deleteOne);
 
-app.post("/api/post", PostController.create);
-app.get("/api/post", PostController.getAll);
-app.get("/api/post/id", PostController.getOne);
-app.put("/api/post", PostController.updateOne);
-app.delete("/api/post", PostController.deleteOne);
+app.post("/api/article", ArticleController.create);
+app.get("/api/article", ArticleController.getAll);
+app.get("/api/article/id", ArticleController.getOne);
+app.put("/api/article", ArticleController.updateOne);
+app.delete("/api/article", ArticleController.deleteOne);
 
-app.post("/api/post", CommentController.create);
-app.put("/api/post", CommentController.updateOne);
-app.delete("/api/post", CommentController.deleteOne);
+app.post("/api/article/comment", CommentController.create);
+app.put("/api/article/comment", CommentController.updateOne);
+app.delete("/api/article/comment", CommentController.deleteOne);
 
 app.use((req, res, next) => {
   res.status(404).json({ message: "Resource not found" });

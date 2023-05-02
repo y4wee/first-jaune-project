@@ -1,6 +1,6 @@
 import { Entity, PrimaryGeneratedColumn, Column, ManyToOne } from "typeorm";
 import { Wilder } from "./Wilder";
-import { Post } from "./Post";
+import { Article } from "./Article";
 
 @Entity()
 export class Comment {
@@ -13,6 +13,6 @@ export class Comment {
   @ManyToOne(() => Wilder, (wilder) => wilder.id, { cascade: true })
   wilder: Wilder;
 
-  @ManyToOne(() => Post, (post) => post.id, { cascade: true })
-  post: Post;
+  @ManyToOne(() => Article, (article) => article.id, { cascade: true })
+  article: Article;
 }

@@ -7,6 +7,7 @@ import AddSkill from "./form/AddSkill";
 
 const Form = ({ wilders, onchangeWilder }: Iform) => {
   const [formOn, setFormOn] = useState<boolean>(false);
+
   return (
     <div>
       <div className={styles.button} onClick={() => setFormOn(true)}>

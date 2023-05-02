@@ -1,5 +1,5 @@
 import { Request, Response } from "express";
-import { Post } from "../entity/Post";
+import { Article } from "../entity/Article";
 import { Wilder } from "../entity/Wilder";
 
 interface ItypedRequestBody<T> extends Request {
@@ -9,7 +9,7 @@ interface ItypedRequestBody<T> extends Request {
 interface IcreateComment {
   content: string;
   wilder: Wilder;
-  post: Post;
+  post: Article;
 }
 
 interface IupdateComment {

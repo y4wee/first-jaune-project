@@ -2,7 +2,7 @@ import { dataSource } from "../utils";
 import { Wilder } from "../entity/Wilder";
 import { IcontrollerWilder } from "../interfaces/wilder";
 
-export const wilderController: IcontrollerWilder = {
+export const WilderController: IcontrollerWilder = {
   create: async (req, res) => {
     try {
       const repository = dataSource.getRepository(Wilder);

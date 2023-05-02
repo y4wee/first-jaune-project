@@ -6,7 +6,7 @@ import {
   OneToMany,
 } from "typeorm";
 import { Skill } from "./Skill";
-import { Post } from "./Post";
+import { Article } from "./Article";
 import { Comment } from "./Comment";
 
 @Entity()
@@ -24,9 +24,9 @@ export class Wilder {
   @JoinTable()
   skills: Skill[];
 
-  @OneToMany(() => Post, (post) => post.wilder, { eager: true })
+  @OneToMany(() => Article, (article) => article.wilder, { eager: true })
   @JoinTable()
-  posts: Post[];
+  articles: Article[];
 
   @OneToMany(() => Comment, (comment) => comment.wilder)
   comments: Comment[];

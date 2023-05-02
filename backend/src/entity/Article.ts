@@ -10,20 +10,23 @@ import { Wilder } from "./Wilder";
 import { Comment } from "./Comment";
 
 @Entity()
-export class Post {
+export class Article {
   @PrimaryGeneratedColumn()
   id: number;
 
   @Column()
   title: string;
 
-  @Column({ nullable: true })
+  @Column()
   content: string;
+
+  @Column({ nullable: true })
+  wilderName: string;
 
   @ManyToOne(() => Wilder, (wilder) => wilder.id, { cascade: true })
   wilder: Wilder;
 
-  @OneToMany(() => Comment, (comment) => comment.post, { eager: true })
+  @OneToMany(() => Comment, (comment) => comment.article, { eager: true })
   @JoinTable()
   comments: Comment[];
 }
