@@ -17,7 +17,7 @@ export const SkillController: IcontrollerSkill = {
       skill.grade = req.body.grade;
       skill.wilder = wilder;
 
-      const response = await repository.save(skill);
+      await repository.save(skill);
       res.send("Added Skill : " + skill.name);
     } catch (error) {
       res.send("Error while creating Skill : " + error);
