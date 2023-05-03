@@ -32,7 +32,7 @@ const AddWilder = () => {
   };
 
   return (
-    <Post path={"/article/comment"} data={wilder} onPosted={onPosted}>
+    <Post path={"/wilder"} data={wilder} onPosted={onPosted}>
       <div className={styles.input}>
         <label>Name </label>
         <input type="text" value={wilder.name} onChange={handleNameChange} />

@@ -37,7 +37,7 @@ const AddSkill = ({ wilders }: Iform) => {
   };
 
   return (
-    <Post path={"/article/comment"} data={skill} onPosted={onPosted}>
+    <Post path={"/skill"} data={skill} onPosted={onPosted}>
       <div className={styles.input}>
         <label>Name </label>
         <input type="text" value={skill.name} onChange={handleNameChange} />
