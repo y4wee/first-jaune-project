@@ -5,6 +5,8 @@ import {
   ManyToOne,
   OneToMany,
   JoinTable,
+  CreateDateColumn,
+  UpdateDateColumn,
 } from "typeorm";
 import { Wilder } from "./Wilder";
 import { Comment } from "./Comment";
@@ -22,6 +24,12 @@ export class Article {
 
   @Column({ nullable: true })
   wilderName: string;
+
+  @CreateDateColumn()
+  createDate: Date;
+
+  @UpdateDateColumn()
+  updateDate: Date;
 
   @ManyToOne(() => Wilder, (wilder) => wilder.id, { cascade: true })
   wilder: Wilder;

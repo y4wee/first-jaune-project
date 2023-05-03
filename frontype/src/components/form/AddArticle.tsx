@@ -1,11 +1,11 @@
 import { useState, ChangeEvent, FormEvent } from "react";
 import axios, { AxiosRequestConfig } from "axios";
 
-import { Iarticle, IpropsChangeArticle } from "../../interfaces/article";
+import { IcreateArticle, IpropsChangeArticle } from "../../interfaces/article";
 import styles from "../../styles/AddArticle.module.css";
 
 const AddPost = ({ onChangeArticle }: IpropsChangeArticle) => {
-  const [article, setArticle] = useState<Iarticle>({
+  const [article, setArticle] = useState<IcreateArticle>({
     title: "",
     content: "",
     wilder: 2,
@@ -24,8 +24,7 @@ const AddPost = ({ onChangeArticle }: IpropsChangeArticle) => {
           url: "http://localhost:4000/api/article",
           data: article,
         };
-        const res = await axios(config);
-        console.log(res.data);
+        await axios(config);
         setArticle({
           title: "",
           content: "",

@@ -19,7 +19,7 @@ export const ArticleController: IcontrollerArticle = {
       article.wilder = wilder;
       article.wilderName = wilder.name;
 
-      console.log(article)
+      console.log(article);
 
       await repository.save(article);
       res.send("new article posted : " + article.title);
@@ -32,7 +32,6 @@ export const ArticleController: IcontrollerArticle = {
     try {
       const repository = dataSource.getRepository(Article);
       const articles = await repository.find();
-
       res.send(articles);
     } catch (error) {
       res.send(error);
