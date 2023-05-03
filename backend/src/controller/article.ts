@@ -17,7 +17,7 @@ export const ArticleController: IcontrollerArticle = {
       article.title = req.body.title;
       article.content = req.body.content;
       article.wilder = wilder;
-      article.wilderName = wilder.name;
+      article.wilderName = wilder.profile.name;
 
       console.log(article);
 

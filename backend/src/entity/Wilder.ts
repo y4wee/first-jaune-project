@@ -3,22 +3,25 @@ import {
   PrimaryGeneratedColumn,
   Column,
   JoinTable,
+  JoinColumn,
+  OneToOne,
   OneToMany,
 } from "typeorm";
 import { Skill } from "./Skill";
 import { Article } from "./Article";
-import { Comment } from "./Comment";
+import { Profile } from "./Profile";
 
 @Entity()
 export class Wilder {
   @PrimaryGeneratedColumn()
   id: number;
 
-  @Column()
-  name: string;
-
-  @Column({ nullable: true })
-  city: string;
+  @OneToOne(() => Profile, (profile) => profile.wilder, {
+    cascade: true,
+    eager: true,
+  })
+  @JoinColumn()
+  profile: Profile;
 
   @OneToMany(() => Skill, (skill) => skill.wilder, {
     eager: true,
@@ -31,7 +34,4 @@ export class Wilder {
   })
   @JoinTable()
   articles: Article[];
-
-  @OneToMany(() => Comment, (comment) => comment.wilder)
-  comments: Comment[];
 }

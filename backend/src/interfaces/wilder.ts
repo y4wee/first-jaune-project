@@ -7,6 +7,8 @@ interface ItypedRequestBody<T> extends Request {
 interface IcreateWilder {
   name: string;
   city: string;
+  description: string;
+  photo: string;
 }
 
 interface IupdateWilder {

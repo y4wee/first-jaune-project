@@ -14,13 +14,9 @@ export interface IcreateWilder {
   description: string;
 }
 
-export interface IpropsChangeWilder {
-  onchangeWilder: () => void;
-}
-
-export interface IpropsWilder extends Iwilder {
-  onchangeWilder: () => void;
-}
+// export interface IpropsChangeWilder {
+//   onchangeWilder: () => void;
+// }
 
 export interface Iform {
   wilders: Iwilder[];

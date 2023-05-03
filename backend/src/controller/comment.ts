@@ -25,7 +25,7 @@ export const CommentController: IcontrollerComment = {
 
       const comment = new Comment();
       comment.content = req.body.content;
-      comment.wilderName = wilder.name;
+      comment.wilderName = wilder.profile.name;
       comment.wilder = wilder;
       comment.article = article;
 

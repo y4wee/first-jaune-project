@@ -1,6 +1,7 @@
+import { IcontrollerWilder } from "../interfaces/wilder";
 import { dataSource } from "../utils";
 import { Wilder } from "../entity/Wilder";
-import { IcontrollerWilder } from "../interfaces/wilder";
+import { Profile } from "../entity/Profile";
 
 export const WilderController: IcontrollerWilder = {
   create: async (req, res) => {
@@ -8,8 +9,14 @@ export const WilderController: IcontrollerWilder = {
       const repository = dataSource.getRepository(Wilder);
 
       const wilder = new Wilder();
-      wilder.name = req.body.name;
-      wilder.city = req.body.city;
+      const profile = new Profile();
+
+      profile.name = req.body.name;
+      profile.city = req.body.city;
+      profile.description = req.body.description;
+      profile.photo = req.body.photo;
+
+      wilder.profile = profile;
 
       await repository.save(wilder);
       res.send("Created wilder");
@@ -36,8 +43,8 @@ export const WilderController: IcontrollerWilder = {
         id: req.body.id,
       });
 
-      user.name = req.body.name && req.body.name;
-      user.city = req.body.city && req.body.city;
+      // user.name = req.body.name && req.body.name;
+      // user.city = req.body.city && req.body.city;
 
       await repository.save(user);
       res.send("wilder updated");
@@ -55,7 +62,7 @@ export const WilderController: IcontrollerWilder = {
       });
 
       await repository.remove(user);
-      res.send("user : " + user.name + " removed");
+      res.send("user : " + " removed");
     } catch (error) {
       res.send(error);
     }
