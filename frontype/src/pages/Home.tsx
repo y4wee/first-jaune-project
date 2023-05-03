@@ -35,7 +35,7 @@ const Home = () => {
       <h1>Home</h1>
       <AddArticle onChangeArticle={updatearticles} />
       <section className={styles.articles}>
-        {articles.map((article) => (
+        {articles?.map((article) => (
           <Article
             key={article.id}
             id={article.id}

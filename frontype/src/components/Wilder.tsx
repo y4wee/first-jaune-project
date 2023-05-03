@@ -1,8 +1,8 @@
-import axios, { AxiosRequestConfig } from "axios";
-import styles from "../styles/Wilder.module.css";
-import Skill from "./Skill";
 import { IpropsWilder, Iskill } from "../interfaces/all";
+import styles from "../styles/Wilder.module.css";
 import blank_pic from "../assets/blank.png";
+import Skill from "./Skill";
+import ButtonDelete from "./button/ButtonDelete";
 
 const Wilder = ({
   id,
@@ -12,22 +12,6 @@ const Wilder = ({
   description,
   onchangeWilder,
 }: IpropsWilder) => {
-  const deleteHandler = async (id: number): Promise<void> => {
-    if (id) {
-      try {
-        const config: AxiosRequestConfig = {
-          method: "delete",
-          url: "http://localhost:4000/api/wilder",
-          data: { id: id },
-        };
-        await axios(config);
-        onchangeWilder();
-      } catch (error) {
-        console.error(error);
-      }
-    }
-  };
-
   const lorem = `Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod
   tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim
   veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea
@@ -50,8 +34,9 @@ const Wilder = ({
           />
         ))}
       </ul>
-      <div className={styles.delete} onClick={() => id && deleteHandler(id)}>
-        X
+
+      <div className={styles.delete}>
+        <ButtonDelete id={id} path={"/wilder"} />
       </div>
     </article>
   );

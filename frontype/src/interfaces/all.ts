@@ -6,7 +6,7 @@ export interface Iskill {
 }
 
 export interface Iwilder {
-  id?: number;
+  id: number;
   name: string;
   city: string;
   description?: string;

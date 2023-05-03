@@ -6,7 +6,7 @@ interface Icomment {
 }
 
 export interface Iarticle {
-  id?: number;
+  id: number;
   title: string;
   content: string;
   createDate: string;
@@ -18,6 +18,11 @@ export interface Iarticle {
 
 export interface IcreateArticle {
   title: string;
+  content: string;
+  wilder: number;
+}
+
+export interface IcreateComment {
   content: string;
   wilder: number;
 }
