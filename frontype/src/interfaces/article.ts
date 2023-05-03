@@ -1,6 +1,7 @@
 interface Icomment {
-  id?: number;
+  id: number;
   content: string;
+  wilderName: string;
   wilder?: number;
   post?: number;
 }
@@ -9,11 +10,11 @@ export interface Iarticle {
   id: number;
   title: string;
   content: string;
+  wilderName: string;
   createDate: string;
   updateDate?: string;
   wilder?: number;
-  wilderName?: string;
-  comments?: Icomment[];
+  comments: Icomment[];
 }
 
 export interface IcreateArticle {
