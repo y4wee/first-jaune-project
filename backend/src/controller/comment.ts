@@ -1,16 +1,33 @@
+import { IcontrollerComment } from "../interfaces/comment";
 import { dataSource } from "../utils";
 import { Comment } from "../entity/Comment";
-import { IcontrollerComment } from "../interfaces/comment";
+import { Article } from "../entity/Article";
+import { Wilder } from "../entity/Wilder";
 
 export const CommentController: IcontrollerComment = {
   create: async (req, res) => {
     try {
       const repository = dataSource.getRepository(Comment);
+      const wilderRepository = dataSource.getRepository(Wilder);
+      const articleRepository = dataSource.getRepository(Article);
+
+      const wilder = await wilderRepository.findOneByOrFail({
+        id: req.body.wilder,
+      });
+      const article = await articleRepository.findOneOrFail({
+        relations: {
+          wilder: true,
+        },
+        where: {
+          id: req.body.article,
+        },
+      });
 
       const comment = new Comment();
       comment.content = req.body.content;
-      comment.wilder = req.body.wilder;
-      comment.article = req.body.post;
+      comment.wilderName = wilder.name;
+      comment.wilder = wilder;
+      comment.article = article;
 
       await repository.save(comment);
       res.send("new comment posted");

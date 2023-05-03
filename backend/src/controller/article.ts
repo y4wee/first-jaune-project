@@ -1,7 +1,7 @@
+import { IcontrollerArticle } from "../interfaces/article";
 import { dataSource } from "../utils";
 import { Article } from "../entity/Article";
 import { Wilder } from "../entity/Wilder";
-import { IcontrollerArticle } from "../interfaces/article";
 
 export const ArticleController: IcontrollerArticle = {
   create: async (req, res) => {

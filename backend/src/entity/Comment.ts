@@ -1,4 +1,11 @@
-import { Entity, PrimaryGeneratedColumn, Column, ManyToOne } from "typeorm";
+import {
+  Entity,
+  PrimaryGeneratedColumn,
+  Column,
+  ManyToOne,
+  CreateDateColumn,
+  UpdateDateColumn,
+} from "typeorm";
 import { Wilder } from "./Wilder";
 import { Article } from "./Article";
 
@@ -9,6 +16,15 @@ export class Comment {
 
   @Column()
   content: string;
+
+  @Column({ nullable: true })
+  wilderName: string;
+
+  @CreateDateColumn()
+  createDate: Date;
+
+  @UpdateDateColumn()
+  updateDate: Date;
 
   @ManyToOne(() => Wilder, (wilder) => wilder.id, { cascade: true })
   wilder: Wilder;
