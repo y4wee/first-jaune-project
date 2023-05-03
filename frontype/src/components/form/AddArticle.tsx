@@ -1,15 +1,17 @@
-import { useState, ChangeEvent, FormEvent } from "react";
+import { useState, ChangeEvent, FormEvent, useContext } from "react";
 import axios, { AxiosRequestConfig } from "axios";
 
-import { IcreateArticle, IpropsChangeArticle } from "../../interfaces/article";
+import { HomeContext } from "../../context/home";
+import { IcreateArticle } from "../../interfaces/article";
 import styles from "../../styles/AddArticle.module.css";
 
-const AddPost = ({ onChangeArticle }: IpropsChangeArticle) => {
+const AddPost = () => {
   const [article, setArticle] = useState<IcreateArticle>({
     title: "",
     content: "",
     wilder: 2,
   });
+  const { updateArticles } = useContext(HomeContext);
 
   const handleSubmit = async (e: FormEvent<HTMLFormElement>): Promise<void> => {
     e.preventDefault();
@@ -30,7 +32,7 @@ const AddPost = ({ onChangeArticle }: IpropsChangeArticle) => {
           content: "",
           wilder: 2,
         });
-        onChangeArticle();
+        updateArticles();
       } catch (error) {
         console.error(error);
       }
@@ -42,7 +44,6 @@ const AddPost = ({ onChangeArticle }: IpropsChangeArticle) => {
   };
 
   const handleContentChange = (e: ChangeEvent<HTMLTextAreaElement>) => {
-    console.log(e.target.value);
     setArticle((article) => ({ ...article, content: e.target.value }));
   };
 

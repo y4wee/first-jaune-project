@@ -24,6 +24,7 @@ export interface IcreateArticle {
 
 export interface IcreateComment {
   content: string;
+  article: number;
   wilder: number;
 }
 

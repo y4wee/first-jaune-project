@@ -2,6 +2,7 @@ import { useEffect, useState } from "react";
 import axios from "axios";
 
 import { Iarticle } from "../interfaces/article";
+import { HomeContext } from "../context/home";
 import styles from "../styles/Home.module.css";
 import Footer from "../components/Footer";
 import Header from "../components/Header";
@@ -25,30 +26,32 @@ const Home = () => {
     getArticles();
   }, []);
 
-  const updatearticles = (): void => {
+  const updateArticles = (): void => {
     getArticles();
   };
 
   return (
-    <div className={styles.home}>
-      <Header />
-      <h1>Home</h1>
-      <AddArticle onChangeArticle={updatearticles} />
-      <section className={styles.articles}>
-        {articles?.map((article) => (
-          <Article
-            key={article.id}
-            id={article.id}
-            wilderName={article.wilderName}
-            title={article.title}
-            content={article.content}
-            createDate={article.createDate}
-            comments={article.comments}
-          />
-        ))}
-      </section>
-      <Footer />
-    </div>
+    <HomeContext.Provider value={{ updateArticles }}>
+      <div className={styles.home}>
+        <Header />
+        <h1>Home</h1>
+        <AddArticle />
+        <section className={styles.articles}>
+          {articles?.map((article) => (
+            <Article
+              key={article.id}
+              id={article.id}
+              wilderName={article.wilderName}
+              title={article.title}
+              content={article.content}
+              createDate={article.createDate}
+              comments={article.comments}
+            />
+          ))}
+        </section>
+        <Footer />
+      </div>
+    </HomeContext.Provider>
   );
 };
 

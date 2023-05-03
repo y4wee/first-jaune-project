@@ -1,9 +1,10 @@
-import { useState, ChangeEvent, FormEvent } from "react";
-import axios, { AxiosRequestConfig } from "axios";
+import { useState, ChangeEvent, useContext } from "react";
 
 import { Iarticle, IcreateComment } from "../../interfaces/article";
+import { HomeContext } from "../../context/home";
 import styles from "../../styles/home/Article.module.css";
 import ButtonDelete from "../button/ButtonDelete";
+import Post from "../form/Post";
 
 const Article = ({
   id,
@@ -15,27 +16,18 @@ const Article = ({
 }: Iarticle) => {
   const [comment, setComment] = useState<IcreateComment>({
     content: "",
+    article: id,
     wilder: 2,
   });
+  const { updateArticles } = useContext(HomeContext);
 
-  const handleSubmit = async (e: FormEvent<HTMLFormElement>): Promise<void> => {
-    e.preventDefault();
-    if (comment.content.length > 0 && comment.wilder) {
-      try {
-        const config: AxiosRequestConfig = {
-          method: "post",
-          url: "http://localhost:4000/api/comment",
-          data: comment,
-        };
-        await axios(config);
-        setComment({
-          content: "",
-          wilder: 2,
-        });
-      } catch (error) {
-        console.error(error);
-      }
-    }
+  const onPosted = () => {
+    setComment({
+      content: "",
+      article: id,
+      wilder: 2,
+    });
+    updateArticles();
   };
 
   const handleContentChange = (e: ChangeEvent<HTMLInputElement>) => {
@@ -65,7 +57,7 @@ const Article = ({
       <div className={styles.content}> {content} </div>
 
       <div className={styles.comments}>
-        <form onSubmit={handleSubmit}>
+        <Post path={"/article/comment"} data={comment} onPosted={onPosted}>
           <input
             type="text"
             placeholder="Ajouter un commentaire"
@@ -73,7 +65,7 @@ const Article = ({
             onChange={handleContentChange}
           />
           <button>post</button>
-        </form>
+        </Post>
         {comments?.map((comment, index) => (
           <div key={comment.id} className={styles.comment}>
             {comment.content}
