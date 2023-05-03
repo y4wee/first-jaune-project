@@ -6,7 +6,12 @@ export const WilderController: IcontrollerWilder = {
   create: async (req, res) => {
     try {
       const repository = dataSource.getRepository(Wilder);
-      await repository.save(req.body);
+
+      const wilder = new Wilder();
+      wilder.name = req.body.name;
+      wilder.city = req.body.city;
+
+      await repository.save(wilder);
       res.send("Created wilder");
     } catch (error) {
       res.send("Error while creating wilder : " + error);
@@ -26,10 +31,14 @@ export const WilderController: IcontrollerWilder = {
   updateOne: async (req, res) => {
     try {
       const repository = dataSource.getRepository(Wilder);
+
       const user = await repository.findOneByOrFail({
         id: req.body.id,
       });
-      user.name = req.body.name;
+
+      user.name = req.body.name && req.body.name;
+      user.city = req.body.city && req.body.city;
+
       await repository.save(user);
       res.send("wilder updated");
     } catch (error) {
@@ -40,9 +49,11 @@ export const WilderController: IcontrollerWilder = {
   deleteOne: async (req, res) => {
     try {
       const repository = dataSource.getRepository(Wilder);
+
       const user = await repository.findOneByOrFail({
         id: req.body.id,
       });
+
       await repository.remove(user);
       res.send("user : " + user.name + " removed");
     } catch (error) {

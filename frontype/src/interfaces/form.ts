@@ -6,3 +6,4 @@ export interface IForm<T> {
   data: T;
   onPosted: () => void;
 }
+

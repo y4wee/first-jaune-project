@@ -2,7 +2,7 @@ import { useState, ChangeEvent, FormEvent } from "react";
 import axios, { AxiosRequestConfig } from "axios";
 
 import { Iwilder, IpropsChangeWilder } from "../../interfaces/all";
-import styles from "../../styles/AddWilder.module.css";
+import styles from "../../styles/form/AddWilder.module.css";
 
 const AddWilder = ({ onchangeWilder }: IpropsChangeWilder) => {
   const [wilder, setWilder] = useState<Iwilder>({

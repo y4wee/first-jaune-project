@@ -2,7 +2,7 @@ import { useState, ChangeEvent, FormEvent } from "react";
 import axios, { AxiosRequestConfig } from "axios";
 
 import { Iskill, Iform } from "../../interfaces/all";
-import styles from "../../styles/AddSkill.module.css";
+import styles from "../../styles/form/AddSkill.module.css";
 
 const AddSkill = ({ wilders, onchangeWilder }: Iform) => {
   const [skill, setSkill] = useState<Iskill>({

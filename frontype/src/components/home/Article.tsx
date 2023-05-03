@@ -1,10 +1,10 @@
-import { useState, ChangeEvent, useContext } from "react";
+import { useContext } from "react";
 
-import { Iarticle, IcreateComment } from "../../interfaces/article";
+import { Iarticle } from "../../interfaces/article";
 import { HomeContext } from "../../context/home";
 import styles from "../../styles/home/Article.module.css";
 import ButtonDelete from "../button/ButtonDelete";
-import Post from "../form/Post";
+import AddComment from "../form/AddComment";
 
 const Article = ({
   id,
@@ -14,25 +14,7 @@ const Article = ({
   createDate,
   comments,
 }: Iarticle) => {
-  const [comment, setComment] = useState<IcreateComment>({
-    content: "",
-    article: id,
-    wilder: 2,
-  });
   const { updateArticles } = useContext(HomeContext);
-
-  const onPosted = () => {
-    setComment({
-      content: "",
-      article: id,
-      wilder: 2,
-    });
-    updateArticles();
-  };
-
-  const handleContentChange = (e: ChangeEvent<HTMLInputElement>) => {
-    setComment((comment) => ({ ...comment, content: e.target.value }));
-  };
 
   const formatedDate = (data: string): string => {
     const date = new Date(data);
@@ -57,15 +39,7 @@ const Article = ({
       <div className={styles.content}> {content} </div>
 
       <div className={styles.comments}>
-        <Post path={"/article/comment"} data={comment} onPosted={onPosted}>
-          <input
-            type="text"
-            placeholder="Ajouter un commentaire"
-            value={comment.content}
-            onChange={handleContentChange}
-          />
-          <button>post</button>
-        </Post>
+        <AddComment id={id} />
         {comments?.map((comment, index) => (
           <div key={comment.id} className={styles.comment}>
             {comment.content}

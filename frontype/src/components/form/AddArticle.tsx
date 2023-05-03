@@ -3,13 +3,13 @@ import axios, { AxiosRequestConfig } from "axios";
 
 import { HomeContext } from "../../context/home";
 import { IcreateArticle } from "../../interfaces/article";
-import styles from "../../styles/AddArticle.module.css";
+import styles from "../../styles/form/AddArticle.module.css";
 
-const AddPost = () => {
+const AddArticle = () => {
   const [article, setArticle] = useState<IcreateArticle>({
     title: "",
     content: "",
-    wilder: 2,
+    wilder: 1,
   });
   const { updateArticles } = useContext(HomeContext);
 
@@ -75,4 +75,4 @@ const AddPost = () => {
   );
 };
 
-export default AddPost;
+export default AddArticle;
