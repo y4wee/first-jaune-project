@@ -1,11 +1,11 @@
 import { useState } from "react";
 
-import { Iform } from "../interfaces/all";
-import styles from "../styles/Form.module.css";
-import AddWilder from "./form/AddWilder";
-import AddSkill from "./form/AddSkill";
+import { Iform } from "../../interfaces/wilder";
+import styles from "../../styles/Form.module.css";
+import AddWilder from "../form/AddWilder";
+import AddSkill from "../form/AddSkill";
 
-const Form = ({ wilders, onchangeWilder }: Iform) => {
+const Form = ({ wilders }: Iform) => {
   const [formOn, setFormOn] = useState<boolean>(false);
 
   return (
@@ -22,8 +22,8 @@ const Form = ({ wilders, onchangeWilder }: Iform) => {
           formOn ? styles.container : `${styles.container} ${styles.off}`
         }
       >
-        <AddWilder onchangeWilder={onchangeWilder} />
-        <AddSkill onchangeWilder={onchangeWilder} wilders={wilders} />
+        <AddWilder />
+        <AddSkill wilders={wilders} />
         <div className={styles.close} onClick={() => setFormOn(false)}>
           X
         </div>

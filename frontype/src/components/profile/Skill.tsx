@@ -1,5 +1,5 @@
-import styles from "../styles/Skill.module.css";
-import { Iskill } from "../interfaces/all";
+import styles from "../../styles/Skill.module.css";
+import { Iskill } from "../../interfaces/skill";
 
 const Skill = ({ id, name, grade }: Iskill) => {
   return (

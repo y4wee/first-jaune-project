@@ -2,12 +2,12 @@ import { useEffect, useState } from "react";
 import axios from "axios";
 
 import { ProfileContext } from "../context/profile";
-import { Iwilder } from "../interfaces/all";
+import { Iwilder } from "../interfaces/wilder";
 import styles from "../styles/Profile.module.css";
 import Header from "../components/Header";
 import Footer from "../components/Footer";
-import Wilder from "../components/Wilder";
-import Form from "../components/Form";
+import Wilder from "../components/profile/Wilder";
+import Form from "../components/profile/Form";
 
 const Profile = () => {
   const [wilders, setWilders] = useState<Iwilder[]>([]);
@@ -33,7 +33,7 @@ const Profile = () => {
       <main className={styles.profile}>
         <Header />
 
-        <Form onchangeWilder={updateWilders} wilders={wilders} />
+        <Form wilders={wilders} />
 
         <section className={styles.section}>
           <h3>Wilders</h3>
@@ -46,7 +46,6 @@ const Profile = () => {
                   id={wilder.id}
                   city={wilder.city}
                   description={wilder.description}
-                  onchangeWilder={updateWilders}
                 />
               </div>
             ))}

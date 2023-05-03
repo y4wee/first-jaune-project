@@ -1,17 +1,16 @@
-import { IpropsWilder, Iskill } from "../interfaces/all";
-import styles from "../styles/Wilder.module.css";
-import blank_pic from "../assets/blank.png";
-import Skill from "./Skill";
-import ButtonDelete from "./button/ButtonDelete";
+import { useContext } from "react";
 
-const Wilder = ({
-  id,
-  name,
-  skills,
-  city,
-  description,
-  onchangeWilder,
-}: IpropsWilder) => {
+import { ProfileContext } from "../../context/profile";
+import { Iwilder } from "../../interfaces/wilder";
+import styles from "../../styles/Wilder.module.css";
+import blank_pic from "../../assets/blank.png";
+
+import Skill from "./Skill";
+import ButtonDelete from "../button/ButtonDelete";
+
+const Wilder = ({ id, name, skills, city, description }: Iwilder) => {
+  const { updateWilders } = useContext(ProfileContext);
+
   const lorem = `Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod
   tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim
   veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea
@@ -25,7 +24,7 @@ const Wilder = ({
       <p>{description ? description : lorem}</p>
       <h4>Wild Skills</h4>
       <ul className={styles.skills}>
-        {skills?.map((skill: Iskill) => (
+        {skills?.map((skill) => (
           <Skill
             key={skill.id}
             id={skill.id}
@@ -36,7 +35,7 @@ const Wilder = ({
       </ul>
 
       <div className={styles.delete}>
-        <ButtonDelete id={id} path={"/wilder"} />
+        <ButtonDelete id={id} path={"/wilder"} onDeleted={updateWilders} />
       </div>
     </article>
   );

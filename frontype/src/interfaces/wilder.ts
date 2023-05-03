@@ -1,16 +1,17 @@
-export interface Iskill {
-  id?: number;
-  name: string;
-  grade: number;
-  wilder?: number;
-}
+import { Iskill } from "./skill";
 
 export interface Iwilder {
   id: number;
   name: string;
   city: string;
   description?: string;
-  skills?: Iskill[];
+  skills: Iskill[];
+}
+
+export interface IcreateWilder {
+  name: string;
+  city: string;
+  description: string;
 }
 
 export interface IpropsChangeWilder {
@@ -23,5 +24,4 @@ export interface IpropsWilder extends Iwilder {
 
 export interface Iform {
   wilders: Iwilder[];
-  onchangeWilder: () => void;
 }

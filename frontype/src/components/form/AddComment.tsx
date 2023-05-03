@@ -3,6 +3,7 @@ import { useState, ChangeEvent, useContext } from "react";
 import { HomeContext } from "../../context/home";
 import { IcreateComment } from "../../interfaces/article";
 import styles from "../../styles/home/AddComment.module.css";
+
 import Post from "../form/Post";
 
 const AddComment = ({ id }: { id: number }) => {

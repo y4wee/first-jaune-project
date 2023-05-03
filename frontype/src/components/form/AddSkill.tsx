@@ -1,37 +1,27 @@
-import { useState, ChangeEvent, FormEvent } from "react";
-import axios, { AxiosRequestConfig } from "axios";
+import { useState, ChangeEvent, useContext } from "react";
 
-import { Iskill, Iform } from "../../interfaces/all";
+import { ProfileContext } from "../../context/profile";
+import { Iform } from "../../interfaces/wilder";
+import { IcreateSkill } from "../../interfaces/skill";
 import styles from "../../styles/form/AddSkill.module.css";
 
-const AddSkill = ({ wilders, onchangeWilder }: Iform) => {
-  const [skill, setSkill] = useState<Iskill>({
+import Post from "./Post";
+
+const AddSkill = ({ wilders }: Iform) => {
+  const [skill, setSkill] = useState<IcreateSkill>({
     name: "",
     grade: 0,
     wilder: NaN,
   });
+  const { updateWilders } = useContext(ProfileContext);
 
-  const handleSubmit = async (e: FormEvent<HTMLFormElement>): Promise<void> => {
-    e.preventDefault();
-    if (skill.name.length > 0 && skill.wilder) {
-      try {
-        const config: AxiosRequestConfig = {
-          method: "post",
-          url: "http://localhost:4000/api/skill",
-          data: skill,
-        };
-        const res = await axios(config);
-        setSkill({
-          name: "",
-          grade: 0,
-          wilder: NaN,
-        });
-        console.log(res.data);
-        onchangeWilder();
-      } catch (error) {
-        console.error(error);
-      }
-    }
+  const onPosted = () => {
+    setSkill({
+      name: "",
+      grade: 0,
+      wilder: NaN,
+    });
+    updateWilders();
   };
 
   const handleNameChange = (e: ChangeEvent<HTMLInputElement>) => {
@@ -47,41 +37,35 @@ const AddSkill = ({ wilders, onchangeWilder }: Iform) => {
   };
 
   return (
-    <div>
-      <form onSubmit={handleSubmit} className={styles.form}>
-        <div className={styles.input}>
-          <label>Name </label>
-          <input type="text" value={skill.name} onChange={handleNameChange} />
-        </div>
-        <div className={styles.input}>
-          <label>Grade : {skill.grade} </label>
-          <input
-            type="range"
-            min="0"
-            max="10"
-            value={skill.grade}
-            onChange={handleGradeChange}
-          />
-        </div>
-        <div className={styles.select}>
-          <label htmlFor="wilder_select">Choose a Wilder</label>
-          <select
-            name="wilders"
-            id="wilder_select"
-            onChange={handlewilderChange}
-          >
-            <option value={undefined}>--Choose a Wilder--</option>
-            {wilders?.map((wilder) => (
-              <option key={wilder.id} value={wilder.id}>
-                {wilder.name}
-              </option>
-            ))}
-          </select>
-        </div>
+    <Post path={"/article/comment"} data={skill} onPosted={onPosted}>
+      <div className={styles.input}>
+        <label>Name </label>
+        <input type="text" value={skill.name} onChange={handleNameChange} />
+      </div>
+      <div className={styles.input}>
+        <label>Grade : {skill.grade} </label>
+        <input
+          type="range"
+          min="0"
+          max="10"
+          value={skill.grade}
+          onChange={handleGradeChange}
+        />
+      </div>
+      <div className={styles.select}>
+        <label htmlFor="wilder_select">Choose a Wilder</label>
+        <select name="wilders" id="wilder_select" onChange={handlewilderChange}>
+          <option value={undefined}>--Choose a Wilder--</option>
+          {wilders?.map((wilder) => (
+            <option key={wilder.id} value={wilder.id}>
+              {wilder.name}
+            </option>
+          ))}
+        </select>
+      </div>
 
-        <button>ADD</button>
-      </form>
-    </div>
+      <button>ADD</button>
+    </Post>
   );
 };
 
