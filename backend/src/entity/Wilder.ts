@@ -20,11 +20,15 @@ export class Wilder {
   @Column({ nullable: true })
   city: string;
 
-  @OneToMany(() => Skill, (skill) => skill.wilder, { eager: true })
+  @OneToMany(() => Skill, (skill) => skill.wilder, {
+    eager: true,
+  })
   @JoinTable()
   skills: Skill[];
 
-  @OneToMany(() => Article, (article) => article.wilder, { eager: true })
+  @OneToMany(() => Article, (article) => article.wilder, {
+    eager: true,
+  })
   @JoinTable()
   articles: Article[];
 

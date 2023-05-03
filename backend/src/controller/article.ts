@@ -69,6 +69,7 @@ export const ArticleController: IcontrollerArticle = {
       const article = await repository.findOneByOrFail({
         id: req.body.id,
       });
+      console.log(article);
       await repository.remove(article);
       res.send("Article : " + article.title + " removed");
     } catch (error) {

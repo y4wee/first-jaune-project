@@ -45,7 +45,7 @@ const Article = ({
   return (
     <article className={styles.article}>
       <div className={styles.button}>
-        <ButtonDelete id={id} path={"/article"} />
+        <ButtonDelete id={id} path={"/article"} onDeleted={updateArticles} />
       </div>
       <div className={styles.header}>
         <div>{wilderName}</div>

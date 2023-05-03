@@ -26,9 +26,9 @@ export class Comment {
   @UpdateDateColumn()
   updateDate: Date;
 
-  @ManyToOne(() => Wilder, (wilder) => wilder.id, { cascade: true })
+  @ManyToOne(() => Wilder, (wilder) => wilder.id, { onDelete: "CASCADE" })
   wilder: Wilder;
 
-  @ManyToOne(() => Article, (article) => article.id, { cascade: true })
+  @ManyToOne(() => Article, (article) => article.id, { onDelete: "CASCADE" })
   article: Article;
 }

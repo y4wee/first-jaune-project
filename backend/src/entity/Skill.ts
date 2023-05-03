@@ -19,6 +19,6 @@ export class Skill {
   @Column({ default: 0 })
   grade: number;
 
-  @ManyToOne(() => Wilder, (wilder) => wilder.id, { cascade: true })
+  @ManyToOne(() => Wilder, (wilder) => wilder.id, { onDelete: "CASCADE" })
   wilder: Wilder;
 }

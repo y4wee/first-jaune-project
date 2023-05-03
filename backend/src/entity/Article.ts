@@ -31,10 +31,12 @@ export class Article {
   @UpdateDateColumn()
   updateDate: Date;
 
-  @ManyToOne(() => Wilder, (wilder) => wilder.id, { cascade: true })
+  @ManyToOne(() => Wilder, (wilder) => wilder.id, { onDelete: "CASCADE" })
   wilder: Wilder;
 
-  @OneToMany(() => Comment, (comment) => comment.article, { eager: true })
+  @OneToMany(() => Comment, (comment) => comment.article, {
+    eager: true,
+  })
   @JoinTable()
   comments: Comment[];
 }

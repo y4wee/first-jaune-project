@@ -1,6 +1,7 @@
 import { useEffect, useState } from "react";
 import axios from "axios";
 
+import { ProfileContext } from "../context/profile";
 import { Iwilder } from "../interfaces/all";
 import styles from "../styles/Profile.module.css";
 import Header from "../components/Header";
@@ -28,31 +29,33 @@ const Profile = () => {
     getWilders();
   };
   return (
-    <main className={styles.profile}>
-      <Header />
+    <ProfileContext.Provider value={{ updateWilders }}>
+      <main className={styles.profile}>
+        <Header />
 
-      <Form onchangeWilder={updateWilders} wilders={wilders} />
+        <Form onchangeWilder={updateWilders} wilders={wilders} />
 
-      <section className={styles.section}>
-        <h3>Wilders</h3>
-        <div className={styles.grid}>
-          {wilders?.map((wilder) => (
-            <div className={styles.container} key={wilder.id}>
-              <Wilder
-                name={wilder.name}
-                skills={wilder.skills}
-                id={wilder.id}
-                city={wilder.city}
-                description={wilder.description}
-                onchangeWilder={updateWilders}
-              />
-            </div>
-          ))}
-        </div>
-      </section>
+        <section className={styles.section}>
+          <h3>Wilders</h3>
+          <div className={styles.grid}>
+            {wilders?.map((wilder) => (
+              <div className={styles.container} key={wilder.id}>
+                <Wilder
+                  name={wilder.name}
+                  skills={wilder.skills}
+                  id={wilder.id}
+                  city={wilder.city}
+                  description={wilder.description}
+                  onchangeWilder={updateWilders}
+                />
+              </div>
+            ))}
+          </div>
+        </section>
 
-      <Footer />
-    </main>
+        <Footer />
+      </main>
+    </ProfileContext.Provider>
   );
 };
 
