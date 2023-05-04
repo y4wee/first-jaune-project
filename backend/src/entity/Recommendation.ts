@@ -1,6 +1,7 @@
-import { Entity, PrimaryGeneratedColumn, Column, ManyToOne } from "typeorm";
+import { Entity, PrimaryGeneratedColumn, Column, ManyToOne, Unique } from "typeorm";
 import { Profile } from "./Profile";
 
+@Unique(["receiver", "sender"])
 @Entity()
 export class Recommendation {
   @PrimaryGeneratedColumn()
