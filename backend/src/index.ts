@@ -5,6 +5,7 @@ import { WilderController } from "./controller/wilder";
 import { SkillController } from "./controller/skill";
 import { ArticleController } from "./controller/article";
 import { CommentController } from "./controller/comment";
+import { RecommendController } from "./controller/recommend";
 
 const app = express();
 
@@ -31,6 +32,10 @@ app.delete("/api/article", ArticleController.deleteOne);
 app.post("/api/article/comment", CommentController.create);
 app.put("/api/article/comment", CommentController.updateOne);
 app.delete("/api/article/comment", CommentController.deleteOne);
+
+app.post("/api/profile/recommend", RecommendController.create);
+app.put("/api/profile/recommend", RecommendController.updateOne);
+app.delete("/api/profile/recommend", RecommendController.deleteOne);
 
 app.use((req, res, next) => {
   res.status(404).json({ message: "Resource not found" });

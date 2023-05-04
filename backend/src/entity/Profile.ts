@@ -9,6 +9,7 @@ import {
 import { Wilder } from "./Wilder";
 import { Parcours } from "./Parcours";
 import { Experience } from "./Experience";
+import { Recommendation } from "./Recommendation";
 
 @Entity()
 export class Profile {
@@ -40,4 +41,20 @@ export class Profile {
   })
   @JoinTable()
   experiences: Experience[];
+
+  @OneToMany(() => Recommendation, (recommendation) => recommendation.sender, {
+    eager: true,
+  })
+  @JoinTable()
+  recommendationsSent: Recommendation[];
+
+  @OneToMany(
+    () => Recommendation,
+    (recommendation) => recommendation.receiver,
+    {
+      eager: true,
+    }
+  )
+  @JoinTable()
+  recommendationsReceived: Recommendation[];
 }

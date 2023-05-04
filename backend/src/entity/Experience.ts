@@ -2,12 +2,8 @@ import {
   Entity,
   PrimaryGeneratedColumn,
   Column,
-  JoinTable,
-  OneToOne,
-  OneToMany,
   ManyToOne,
 } from "typeorm";
-import { Wilder } from "./Wilder";
 import { Profile } from "./Profile";
 
 @Entity()
@@ -27,7 +23,7 @@ export class Experience {
   @Column()
   end: string;
 
-  @ManyToOne(() => Profile, (profile) => profile.experiences, {
+  @ManyToOne(() => Profile, (profile) => profile.id, {
     onDelete: "CASCADE",
   })
   profile: Profile;
