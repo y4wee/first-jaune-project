@@ -22,7 +22,7 @@ export const RecommendController: IcontrollerRecommend = {
       recommendation.sender = sender;
 
       await repository.save(recommendation);
-      res.send("new comment posted");
+      res.send("new recommendation posted to : " + receiver.name);
     } catch (error) {
       res.send("Error while posting comment : " + error);
     }
@@ -34,7 +34,7 @@ export const RecommendController: IcontrollerRecommend = {
       const response = await repository.update(req.body.id, {
         content: req.body.content,
       });
-      res.send("Comment updated : " + response);
+      res.send("recommendation updated : " + response);
     } catch (error) {
       res.send(error);
     }
@@ -47,7 +47,7 @@ export const RecommendController: IcontrollerRecommend = {
         id: req.body.id,
       });
       await repository.remove(recommendation);
-      res.send("Comment removed");
+      res.send("Recommendation removed");
     } catch (error) {
       res.send(error);
     }

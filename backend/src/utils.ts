@@ -7,6 +7,7 @@ import { Profile } from "./entity/Profile";
 import { Parcours } from "./entity/Parcours";
 import { Experience } from "./entity/Experience";
 import { Recommendation } from "./entity/Recommendation";
+import { Follow } from "./entity/Follow";
 
 export const dataSource = new DataSource({
   type: "sqlite",
@@ -21,5 +22,6 @@ export const dataSource = new DataSource({
     Parcours,
     Experience,
     Recommendation,
+    Follow,
   ],
 });

@@ -6,6 +6,7 @@ import { SkillController } from "./controller/skill";
 import { ArticleController } from "./controller/article";
 import { CommentController } from "./controller/comment";
 import { RecommendController } from "./controller/recommend";
+import { FollowController } from "./controller/follow";
 
 const app = express();
 
@@ -36,6 +37,9 @@ app.delete("/api/article/comment", CommentController.deleteOne);
 app.post("/api/profile/recommend", RecommendController.create);
 app.put("/api/profile/recommend", RecommendController.updateOne);
 app.delete("/api/profile/recommend", RecommendController.deleteOne);
+
+app.post("/api/profile/follow", FollowController.create);
+app.delete("/api/profile/follow", FollowController.deleteOne);
 
 app.use((req, res, next) => {
   res.status(404).json({ message: "Resource not found" });

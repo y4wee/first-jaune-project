@@ -10,6 +10,7 @@ import { Wilder } from "./Wilder";
 import { Parcours } from "./Parcours";
 import { Experience } from "./Experience";
 import { Recommendation } from "./Recommendation";
+import { Follow } from "./Follow";
 
 @Entity()
 export class Profile {
@@ -57,4 +58,16 @@ export class Profile {
   )
   @JoinTable()
   recommendationsReceived: Recommendation[];
+
+  @OneToMany(() => Follow, (follow) => follow.following, {
+    eager: true,
+  })
+  @JoinTable()
+  followers: Follow[];
+
+  @OneToMany(() => Follow, (follow) => follow.follower, {
+    eager: true,
+  })
+  @JoinTable()
+  following: Follow[];
 }
