@@ -13,12 +13,12 @@ const Profile = () => {
 
   const getProfile = async (): Promise<void> => {
     try {
-      const config: AxiosRequestConfig = {
-        method: "get",
-        url: "http://localhost:4000/api/profile/id",
-        data: { id: 1 },
-      };
-      const res = await axios(config);
+      const profileId = +window.location.pathname.split("/")[2];
+
+      const res = await axios.get(
+        `http://localhost:4000/api/profile/${profileId ? profileId : 1}`
+      );
+
       res && setProfile(res.data);
     } catch (error) {
       console.error(error);

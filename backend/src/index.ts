@@ -20,7 +20,7 @@ app.get("/api/wilder", WilderController.getOwn);
 app.put("/api/wilder", WilderController.updateOne);
 app.delete("/api/wilder", WilderController.deleteOne);
 
-app.get("/api/profile/id", ProfileController.getOne);
+app.get("/api/profile/:id", ProfileController.getOne);
 app.get("/api/profile/all", ProfileController.getAll);
 app.put("/api/profile", ProfileController.updateOwner);
 

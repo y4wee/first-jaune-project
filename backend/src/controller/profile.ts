@@ -10,7 +10,7 @@ export const ProfileController: IcontrollerProfile = {
       const repository = dataSource.getRepository(Profile);
       const profile = await repository.findOneOrFail({
         where: {
-          id: req.body.id,
+          id: +req.params.id,
         },
         relations: [
           "skills",
