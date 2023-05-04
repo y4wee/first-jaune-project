@@ -41,7 +41,7 @@ export const ArticleController: IcontrollerArticle = {
     try {
       const repository = dataSource.getRepository(Article);
       const article = await repository.findOneOrFail({
-        where: { id: req.body.id },
+        where: { id: +req.params.id },
         relations: ["profile"],
       });
       res.send(article);

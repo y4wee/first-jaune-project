@@ -1,5 +1,5 @@
 import { useEffect, useState } from "react";
-import axios, { AxiosRequestConfig } from "axios";
+import axios from "axios";
 
 import { ProfileContext } from "../context/profile";
 import { Iprofile } from "../interfaces/wilder";

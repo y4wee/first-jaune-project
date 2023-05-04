@@ -31,7 +31,7 @@ app.delete("/api/skill", SkillController.deleteOne);
 
 app.post("/api/article", ArticleController.create);
 app.get("/api/article", ArticleController.getAll);
-app.get("/api/article/id", ArticleController.getOne);
+app.get("/api/article/:id", ArticleController.getOne);
 app.put("/api/article", ArticleController.updateOne);
 app.delete("/api/article", ArticleController.deleteOne);
 
