@@ -41,9 +41,9 @@ const Home = () => {
             <Article
               key={article.id}
               id={article.id}
-              wilderName={article.wilderName}
               title={article.title}
               content={article.content}
+              profile={article.profile}
               createDate={article.createDate}
               comments={article.comments}
             />

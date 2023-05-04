@@ -1,58 +1,48 @@
 import { useEffect, useState } from "react";
-import axios from "axios";
+import axios, { AxiosRequestConfig } from "axios";
 
 import { ProfileContext } from "../context/profile";
-import { Iwilder } from "../interfaces/wilder";
-import styles from "../styles/Profile.module.css";
+import { Iprofile } from "../interfaces/wilder";
+import styles from "../styles/profile/Profile.module.css";
 import Header from "../components/Header";
 import Footer from "../components/Footer";
-import Wilder from "../components/profile/Wilder";
-import Form from "../components/profile/Form";
+import Details from "../components/profile/Details";
 
 const Profile = () => {
-  const [wilders, setWilders] = useState<Iwilder[]>([]);
+  const [profile, setProfile] = useState<Iprofile>(Object);
 
-  const getWilders = async (): Promise<void> => {
+  const getProfile = async (): Promise<void> => {
     try {
-      const res = await axios.get("http://localhost:4000/api/wilder");
-      console.log(res.data);
-      res && setWilders(res.data);
+      const profileId = +window.location.pathname.split("/")[2];
+
+      const res = await axios.get(
+        `http://localhost:4000/api/profile/${profileId ? profileId : 1}`
+      );
+
+      res && setProfile(res.data);
     } catch (error) {
       console.error(error);
     }
   };
 
   useEffect(() => {
-    getWilders();
+    getProfile();
   }, []);
 
-  const updateWilders = (): void => {
-    getWilders();
+  const updateProfile = (): void => {
+    getProfile();
   };
   return (
-    <ProfileContext.Provider value={{ updateWilders }}>
+    <ProfileContext.Provider value={{ updateProfile }}>
       <main className={styles.profile}>
         <Header />
 
-        <Form wilders={wilders} />
-
-        <section className={styles.section}>
-          <h3>Wilders</h3>
-          <div className={styles.grid}>
-            {wilders?.map((wilder) => (
-              <div className={styles.container} key={wilder.id}>
-                <Wilder
-                  name={wilder.profile.name}
-                  skills={wilder.skills}
-                  id={wilder.profile.id}
-                  city={wilder.profile.city}
-                  description={wilder.profile.description}
-                  photo={wilder.profile.photo}
-                />
-              </div>
-            ))}
-          </div>
-        </section>
+        <Details
+          name={profile.name}
+          city={profile.city}
+          description={profile.description}
+          photo={profile.photo}
+        />
 
         <Footer />
       </main>

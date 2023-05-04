@@ -10,7 +10,7 @@ const Article = ({
   id,
   title,
   content,
-  wilderName,
+  profile,
   createDate,
   comments,
 }: Iarticle) => {
@@ -29,8 +29,9 @@ const Article = ({
       <div className={styles.button}>
         <ButtonDelete id={id} path={"/article"} onDeleted={updateArticles} />
       </div>
+
       <div className={styles.header}>
-        <div>{wilderName}</div>
+        <div>{profile.name}</div>
         <span> {formatedDate(createDate)} </span>
       </div>
 
@@ -40,6 +41,7 @@ const Article = ({
 
       <div className={styles.comments}>
         <AddComment id={id} />
+
         {comments?.map((comment, index) => (
           <div key={comment.id} className={styles.comment}>
             {comment.content}
