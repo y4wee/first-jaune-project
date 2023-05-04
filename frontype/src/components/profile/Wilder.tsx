@@ -1,14 +1,21 @@
 import { useContext } from "react";
 
 import { ProfileContext } from "../../context/profile";
-import { Iwilder } from "../../interfaces/wilder";
+import { IpropsWilder } from "../../interfaces/wilder";
 import styles from "../../styles/Wilder.module.css";
 import blank_pic from "../../assets/blank.png";
 
 import Skill from "./Skill";
 import ButtonDelete from "../button/ButtonDelete";
 
-const Wilder = ({ id, name, skills, city, description }: Iwilder) => {
+const Wilder = ({
+  id,
+  name,
+  city,
+  description,
+  photo,
+  skills,
+}: IpropsWilder) => {
   const { updateWilders } = useContext(ProfileContext);
 
   const lorem = `Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod
@@ -18,7 +25,7 @@ const Wilder = ({ id, name, skills, city, description }: Iwilder) => {
 
   return (
     <article className={styles.card}>
-      <img src={blank_pic} alt="wilder" />
+      <img src={photo ? photo : blank_pic} alt="wilder" />
       <h3>{name}</h3>
       <h2>{city}</h2>
       <p>{description ? description : lorem}</p>

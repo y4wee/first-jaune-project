@@ -58,7 +58,7 @@ const AddSkill = ({ wilders }: Iform) => {
           <option value={undefined}>--Choose a Wilder--</option>
           {wilders?.map((wilder) => (
             <option key={wilder.id} value={wilder.id}>
-              {wilder.name}
+              {wilder.profile.name}
             </option>
           ))}
         </select>

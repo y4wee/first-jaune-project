@@ -1,10 +1,25 @@
 import { Iskill } from "./skill";
 
-export interface Iwilder {
+export interface Iprofile {
   id: number;
   name: string;
   city: string;
-  description?: string;
+  description: string;
+  photo: string;
+}
+
+export interface Iwilder {
+  id: number;
+  profile: Iprofile;
+  skills: Iskill[];
+}
+
+export interface IpropsWilder {
+  id: number;
+  name: string;
+  city: string;
+  description: string;
+  photo: string;
   skills: Iskill[];
 }
 

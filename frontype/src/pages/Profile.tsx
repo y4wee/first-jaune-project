@@ -41,11 +41,12 @@ const Profile = () => {
             {wilders?.map((wilder) => (
               <div className={styles.container} key={wilder.id}>
                 <Wilder
-                  name={wilder.name}
+                  name={wilder.profile.name}
                   skills={wilder.skills}
-                  id={wilder.id}
-                  city={wilder.city}
-                  description={wilder.description}
+                  id={wilder.profile.id}
+                  city={wilder.profile.city}
+                  description={wilder.profile.description}
+                  photo={wilder.profile.photo}
                 />
               </div>
             ))}
