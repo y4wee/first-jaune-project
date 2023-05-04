@@ -8,6 +8,7 @@ import {
 } from "typeorm";
 import { Wilder } from "./Wilder";
 import { Parcours } from "./Parcours";
+import { Experience } from "./Experience";
 
 @Entity()
 export class Profile {
@@ -32,4 +33,11 @@ export class Profile {
   @OneToMany(() => Parcours, (parcours) => parcours.profile, { eager: true })
   @JoinTable()
   parcours: Parcours[];
+
+  @OneToMany(() => Experience, (experience) => experience.profile, {
+    eager: true,
+    cascade: true,
+  })
+  @JoinTable()
+  experiences: Experience[];
 }
