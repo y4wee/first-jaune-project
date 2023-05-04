@@ -2,6 +2,7 @@ import express from "express";
 import cors from "cors";
 import { dataSource } from "./utils";
 import { WilderController } from "./controller/wilder";
+import { ProfileController } from "./controller/profile";
 import { SkillController } from "./controller/skill";
 import { ArticleController } from "./controller/article";
 import { CommentController } from "./controller/comment";
@@ -15,9 +16,13 @@ app.use(cors());
 app.use(express.json());
 
 app.post("/api/wilder", WilderController.create);
-app.get("/api/wilder", WilderController.getAll);
+app.get("/api/wilder", WilderController.getOwn);
 app.put("/api/wilder", WilderController.updateOne);
 app.delete("/api/wilder", WilderController.deleteOne);
+
+app.get("/api/profile/id", ProfileController.getOne);
+app.get("/api/profile/all", ProfileController.getAll);
+app.put("/api/profile", ProfileController.updateOwner);
 
 app.post("/api/skill", SkillController.create);
 app.get("/api/skill/names", SkillController.getAllNames);
@@ -35,6 +40,7 @@ app.put("/api/article/comment", CommentController.updateOne);
 app.delete("/api/article/comment", CommentController.deleteOne);
 
 app.post("/api/profile/recommend", RecommendController.create);
+app.get("/api/profile/recommend", RecommendController.getByIds);
 app.put("/api/profile/recommend", RecommendController.updateOne);
 app.delete("/api/profile/recommend", RecommendController.deleteOne);
 

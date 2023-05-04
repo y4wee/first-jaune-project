@@ -15,6 +15,7 @@ const Profile = () => {
   const getWilders = async (): Promise<void> => {
     try {
       const res = await axios.get("http://localhost:4000/api/wilder");
+      console.log(res.data);
       res && setWilders(res.data);
     } catch (error) {
       console.error(error);

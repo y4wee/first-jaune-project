@@ -1,16 +1,22 @@
+import { IcontrollerSkill } from "../interfaces/skill";
 import { dataSource } from "../utils";
 import { Skill } from "../entity/Skill";
-import { IcontrollerSkill } from "../interfaces/skill";
+import { Profile } from "../entity/Profile";
 
 export const SkillController: IcontrollerSkill = {
   create: async (req, res) => {
     try {
       const repository = dataSource.getRepository(Skill);
+      const profileRepository = dataSource.getRepository(Profile);
+
+      const profile = await profileRepository.findOneByOrFail({
+        id: req.body.profile,
+      });
 
       const skill = new Skill();
       skill.name = req.body.name;
       skill.grade = req.body.grade;
-      skill.wilder = req.body.wilder;
+      skill.profile = profile;
 
       await repository.save(skill);
       res.send("Added Skill : " + skill.name);

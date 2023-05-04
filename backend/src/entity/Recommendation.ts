@@ -1,4 +1,11 @@
-import { Entity, PrimaryGeneratedColumn, Column, ManyToOne, Unique } from "typeorm";
+import {
+  Entity,
+  PrimaryGeneratedColumn,
+  Column,
+  ManyToOne,
+  Unique,
+  JoinColumn,
+} from "typeorm";
 import { Profile } from "./Profile";
 
 @Unique(["receiver", "sender"])

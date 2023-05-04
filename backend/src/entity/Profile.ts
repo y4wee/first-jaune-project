@@ -2,20 +2,24 @@ import {
   Entity,
   PrimaryGeneratedColumn,
   Column,
-  JoinTable,
-  OneToOne,
   OneToMany,
+  OneToOne,
+  JoinColumn,
 } from "typeorm";
 import { Wilder } from "./Wilder";
-import { Parcours } from "./Parcours";
+import { Skill } from "./Skill";
 import { Experience } from "./Experience";
 import { Recommendation } from "./Recommendation";
+import { Parcours } from "./Parcours";
 import { Follow } from "./Follow";
 
 @Entity()
 export class Profile {
   @PrimaryGeneratedColumn()
   id: number;
+
+  @OneToOne(() => Wilder, (wilder) => wilder.id, { onDelete: "CASCADE" })
+  wilder: Wilder;
 
   @Column()
   name: string;
@@ -29,45 +33,25 @@ export class Profile {
   @Column({ nullable: true })
   photo: string;
 
-  @OneToOne(() => Wilder, (wilder) => wilder.profile)
-  wilder: Wilder;
+  @OneToMany(() => Skill, (skill) => skill.profile)
+  skills: Skill[];
 
-  @OneToMany(() => Parcours, (parcours) => parcours.profile, { eager: true })
-  @JoinTable()
+  @OneToMany(() => Parcours, (parcours) => parcours.profile, {
+    cascade: true,
+  })
   parcours: Parcours[];
 
   @OneToMany(() => Experience, (experience) => experience.profile, {
-    eager: true,
     cascade: true,
   })
-  @JoinTable()
   experiences: Experience[];
 
-  @OneToMany(() => Recommendation, (recommendation) => recommendation.sender, {
-    eager: true,
-  })
-  @JoinTable()
-  recommendationsSent: Recommendation[];
-
-  @OneToMany(
-    () => Recommendation,
-    (recommendation) => recommendation.receiver,
-    {
-      eager: true,
-    }
-  )
-  @JoinTable()
+  @OneToMany(() => Recommendation, (recommendation) => recommendation.receiver)
   recommendationsReceived: Recommendation[];
 
-  @OneToMany(() => Follow, (follow) => follow.following, {
-    eager: true,
-  })
-  @JoinTable()
+  @OneToMany(() => Follow, (follow) => follow.following)
   followers: Follow[];
 
-  @OneToMany(() => Follow, (follow) => follow.follower, {
-    eager: true,
-  })
-  @JoinTable()
+  @OneToMany(() => Follow, (follow) => follow.follower)
   following: Follow[];
 }

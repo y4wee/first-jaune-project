@@ -1,3 +1,4 @@
+import { In } from "typeorm";
 import { IcontrollerRecommend } from "../interfaces/recommend";
 import { dataSource } from "../utils";
 import { Recommendation } from "../entity/Recommendation";
@@ -25,6 +26,23 @@ export const RecommendController: IcontrollerRecommend = {
       res.send("new recommendation posted to : " + receiver.name);
     } catch (error) {
       res.send("Error while posting comment : " + error);
+    }
+  },
+
+  getByIds: async (req, res) => {
+    try {
+      const repository = dataSource.getRepository(Recommendation);
+      // const profileRepository = dataSource.getRepository(Profile);
+
+      const recommendations = await repository.find({
+        where: {
+          id: In(req.body.ids),
+        },
+        relations: ["sender"],
+      });
+      res.send(recommendations);
+    } catch (error) {
+      res.send(error);
     }
   },
 

@@ -22,7 +22,9 @@ const Form = ({ wilders }: Iform) => {
           formOn ? styles.container : `${styles.container} ${styles.off}`
         }
       >
+        <p>Add Wilder</p>
         <AddWilder />
+        <p>Add Skill</p>
         <AddSkill wilders={wilders} />
         <div className={styles.close} onClick={() => setFormOn(false)}>
           X

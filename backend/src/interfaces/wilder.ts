@@ -11,6 +11,10 @@ interface IcreateWilder {
   photo: string;
 }
 
+interface IgetWilder {
+  id: number;
+}
+
 interface IupdateWilder {
   id: number;
   name: string;
@@ -23,7 +27,7 @@ interface IdeleteWilder {
 
 export interface IcontrollerWilder {
   create(req: ItypedRequestBody<IcreateWilder>, res: Response): Promise<void>;
-  getAll(req: Request, res: Response): Promise<void>;
+  getOwn(req: ItypedRequestBody<IgetWilder>, res: Response): Promise<void>;
   updateOne(
     req: ItypedRequestBody<IupdateWilder>,
     res: Response

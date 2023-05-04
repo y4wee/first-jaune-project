@@ -10,6 +10,10 @@ interface IcreateRecommend {
   sender: number;
 }
 
+interface IgetRecommend {
+  ids: number[];
+}
+
 interface IupdateRecommend {
   id: number;
   content: string;
@@ -22,6 +26,10 @@ interface IdeleteRecommend {
 export interface IcontrollerRecommend {
   create(
     req: ItypedRequestBody<IcreateRecommend>,
+    res: Response
+  ): Promise<void>;
+  getByIds(
+    req: ItypedRequestBody<IgetRecommend>,
     res: Response
   ): Promise<void>;
   updateOne(

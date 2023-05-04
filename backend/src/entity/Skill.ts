@@ -5,9 +5,9 @@ import {
   ManyToOne,
   Unique,
 } from "typeorm";
-import { Wilder } from "./Wilder";
+import { Profile } from "./Profile";
 
-@Unique(["name", "wilder"])
+@Unique(["name", "profile"])
 @Entity()
 export class Skill {
   @PrimaryGeneratedColumn()
@@ -19,6 +19,6 @@ export class Skill {
   @Column({ default: 0 })
   grade: number;
 
-  @ManyToOne(() => Wilder, (wilder) => wilder.id, { onDelete: "CASCADE" })
-  wilder: Wilder;
+  @ManyToOne(() => Profile, (profile) => profile.id, { onDelete: "CASCADE" })
+  profile: Profile;
 }

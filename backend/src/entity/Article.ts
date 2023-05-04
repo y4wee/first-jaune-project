@@ -4,7 +4,7 @@ import {
   Column,
   ManyToOne,
   OneToMany,
-  JoinTable,
+  JoinColumn,
   CreateDateColumn,
   UpdateDateColumn,
 } from "typeorm";
@@ -37,6 +37,6 @@ export class Article {
   @OneToMany(() => Comment, (comment) => comment.article, {
     eager: true,
   })
-  @JoinTable()
+  @JoinColumn()
   comments: Comment[];
 }

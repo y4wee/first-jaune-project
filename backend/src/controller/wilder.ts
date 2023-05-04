@@ -25,11 +25,16 @@ export const WilderController: IcontrollerWilder = {
     }
   },
 
-  getAll: async (req, res) => {
+  getOwn: async (req, res) => {
     try {
       const repository = dataSource.getRepository(Wilder);
-      const wilders = await repository.find();
-      res.send(wilders);
+      const wilder = await repository.findOneOrFail({
+        where: {
+          id: req.body.id,
+        },
+        relations: ["profile"],
+      });
+      res.send(wilder);
     } catch (error) {
       res.send(error);
     }
