@@ -6,7 +6,7 @@ import {
   CreateDateColumn,
   UpdateDateColumn,
 } from "typeorm";
-import { Wilder } from "./Wilder";
+import { Profile } from "./Profile";
 import { Article } from "./Article";
 
 @Entity()
@@ -17,19 +17,17 @@ export class Comment {
   @Column()
   content: string;
 
-  @Column({ nullable: true })
-  wilderName: string;
-
   @CreateDateColumn()
   createDate: Date;
 
   @UpdateDateColumn()
   updateDate: Date;
 
-  @ManyToOne(() => Wilder, (wilder) => wilder.id, {
+  @ManyToOne(() => Profile, (profile) => profile.id, {
     onDelete: "CASCADE",
+    eager: true,
   })
-  wilder: Wilder;
+  profile: Profile;
 
   @ManyToOne(() => Article, (article) => article.id, { onDelete: "CASCADE" })
   article: Article;

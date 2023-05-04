@@ -1,25 +1,22 @@
 import { IcontrollerArticle } from "../interfaces/article";
 import { dataSource } from "../utils";
 import { Article } from "../entity/Article";
-import { Wilder } from "../entity/Wilder";
+import { Profile } from "../entity/Profile";
 
 export const ArticleController: IcontrollerArticle = {
   create: async (req, res) => {
     try {
       const repository = dataSource.getRepository(Article);
-      const wilderRepository = dataSource.getRepository(Wilder);
+      const profileRepository = dataSource.getRepository(Profile);
 
-      const wilder = await wilderRepository.findOneByOrFail({
-        id: req.body.wilder,
+      const profile = await profileRepository.findOneByOrFail({
+        id: req.body.profile,
       });
 
       const article = new Article();
       article.title = req.body.title;
       article.content = req.body.content;
-      article.wilder = wilder;
-      article.wilderName = wilder.profile.name;
-
-      console.log(article);
+      article.profile = profile;
 
       await repository.save(article);
       res.send("new article posted : " + article.title);
@@ -31,7 +28,9 @@ export const ArticleController: IcontrollerArticle = {
   getAll: async (req, res) => {
     try {
       const repository = dataSource.getRepository(Article);
-      const articles = await repository.find();
+      const articles = await repository.find({
+        relations: ["profile", "comments"],
+      });
       res.send(articles);
     } catch (error) {
       res.send(error);
@@ -41,8 +40,9 @@ export const ArticleController: IcontrollerArticle = {
   getOne: async (req, res) => {
     try {
       const repository = dataSource.getRepository(Article);
-      const article = await repository.findOneByOrFail({
-        id: req.body.id,
+      const article = await repository.findOneOrFail({
+        where: { id: req.body.id },
+        relations: ["profile"],
       });
       res.send(article);
     } catch (error) {

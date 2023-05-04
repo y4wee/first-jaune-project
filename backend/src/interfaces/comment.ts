@@ -6,7 +6,7 @@ interface ItypedRequestBody<T> extends Request {
 
 interface IcreateComment {
   content: string;
-  wilder: number;
+  profile: number;
   article: number;
 }
 

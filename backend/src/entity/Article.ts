@@ -4,11 +4,11 @@ import {
   Column,
   ManyToOne,
   OneToMany,
-  JoinColumn,
   CreateDateColumn,
   UpdateDateColumn,
 } from "typeorm";
 import { Wilder } from "./Wilder";
+import { Profile } from "./Profile";
 import { Comment } from "./Comment";
 
 @Entity()
@@ -22,21 +22,22 @@ export class Article {
   @Column()
   content: string;
 
-  @Column({ nullable: true })
-  wilderName: string;
-
   @CreateDateColumn()
   createDate: Date;
 
   @UpdateDateColumn()
   updateDate: Date;
 
-  @ManyToOne(() => Wilder, (wilder) => wilder.id, { onDelete: "CASCADE" })
+  @ManyToOne(() => Profile, (profile) => profile.id, {
+    onDelete: "CASCADE",
+  })
+  profile: Profile;
+
+  @ManyToOne(() => Wilder, (Wilder) => Wilder.id, {
+    onDelete: "CASCADE",
+  })
   wilder: Wilder;
 
-  @OneToMany(() => Comment, (comment) => comment.article, {
-    eager: true,
-  })
-  @JoinColumn()
+  @OneToMany(() => Comment, (comment) => comment.article)
   comments: Comment[];
 }

@@ -7,7 +7,7 @@ interface ItypedRequestBody<T> extends Request {
 interface IcreatePost {
   title: string;
   content: string;
-  wilder: number;
+  profile: number;
 }
 
 interface IgetOnePost {
