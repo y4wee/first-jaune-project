@@ -1,19 +1,19 @@
+import { IprofileBase } from "./profile";
+
 interface Icomment {
   id: number;
   content: string;
   wilderName: string;
-  wilder?: number;
-  post?: number;
+  profile: IprofileBase;
 }
 
 export interface Iarticle {
   id: number;
   title: string;
   content: string;
-  wilderName: string;
+  profile: IprofileBase;
   createDate: string;
   updateDate?: string;
-  wilder?: number;
   comments: Icomment[];
 }
 

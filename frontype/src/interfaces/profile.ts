@@ -12,6 +12,14 @@ export interface Iprofile {
   parcours: any;
 }
 
+export interface IprofileBase {
+  id: number;
+  name: string;
+  city: string;
+  description: string;
+  photo: string;
+}
+
 export interface Idetails {
   name: string;
   city: string;
