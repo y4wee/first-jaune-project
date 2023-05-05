@@ -2,6 +2,7 @@ import { IcontrollerWilder } from "../interfaces/wilder";
 import { dataSource } from "../utils";
 import { Wilder } from "../entity/Wilder";
 import { Profile } from "../entity/Profile";
+import { Network } from "../entity/Network";
 
 export const WilderController: IcontrollerWilder = {
   create: async (req, res) => {
@@ -10,13 +11,16 @@ export const WilderController: IcontrollerWilder = {
 
       const wilder = new Wilder();
       const profile = new Profile();
+      const network = new Network();
 
       profile.name = req.body.name;
       profile.city = req.body.city;
       profile.description = req.body.description;
       profile.photo = req.body.photo;
+      profile.network = network;
 
       wilder.profile = profile;
+      wilder.network = network;
 
       await repository.save(wilder);
       res.send("Created wilder");

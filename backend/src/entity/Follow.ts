@@ -1,9 +1,5 @@
-import {
-  Entity,
-  PrimaryGeneratedColumn,
-  ManyToOne,
-  Unique,
-} from "typeorm";
+import { Entity, PrimaryGeneratedColumn, ManyToOne, Unique } from "typeorm";
+import { Network } from "./Network";
 import { Profile } from "./Profile";
 
 @Unique(["following", "follower"])
@@ -14,6 +10,7 @@ export class Follow {
 
   @ManyToOne(() => Profile, (profile) => profile.id, {
     onDelete: "CASCADE",
+    eager: true,
   })
   following: Profile;
 
@@ -21,4 +18,14 @@ export class Follow {
     onDelete: "CASCADE",
   })
   follower: Profile;
+
+  @ManyToOne(() => Network, (network) => network.id, {
+    onDelete: "CASCADE",
+  })
+  followingNetwork: Network;
+
+  @ManyToOne(() => Network, (network) => network.id, {
+    onDelete: "CASCADE",
+  })
+  followerNetwork: Network;
 }

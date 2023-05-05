@@ -9,16 +9,25 @@ export const FollowController: IcontrollerFollow = {
       const repository = dataSource.getRepository(Follow);
       const profileRepository = dataSource.getRepository(Profile);
 
-      const following = await profileRepository.findOneByOrFail({
-        id: req.body.following,
+      const following = await profileRepository.findOneOrFail({
+        where: {
+          id: req.body.following,
+        },
+        relations: ["network"],
       });
-      const follower = await profileRepository.findOneByOrFail({
-        id: req.body.follower,
+      const follower = await profileRepository.findOneOrFail({
+        where: {
+          id: req.body.follower,
+        },
+        relations: ["network"],
       });
 
       const follow = new Follow();
+      
       follow.following = following;
+      follow.followingNetwork = following.network;
       follow.follower = follower;
+      follow.followerNetwork = follower.network;
 
       await repository.save(follow);
       res.send("you are following : " + following.name);

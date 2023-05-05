@@ -7,11 +7,11 @@ import {
   JoinColumn,
 } from "typeorm";
 import { Wilder } from "./Wilder";
+import { Network } from "./Network";
 import { Skill } from "./Skill";
 import { Experience } from "./Experience";
 import { Recommendation } from "./Recommendation";
 import { Parcours } from "./Parcours";
-import { Follow } from "./Follow";
 
 @Entity()
 export class Profile {
@@ -49,9 +49,7 @@ export class Profile {
   @OneToMany(() => Recommendation, (recommendation) => recommendation.receiver)
   recommendationsReceived: Recommendation[];
 
-  @OneToMany(() => Follow, (follow) => follow.following)
-  followers: Follow[];
-
-  @OneToMany(() => Follow, (follow) => follow.follower)
-  following: Follow[];
+  @OneToOne(() => Network, (network) => network.id, { onDelete: "CASCADE" })
+  @JoinColumn()
+  network: Network;
 }
