@@ -26,4 +26,5 @@ export const dataSource = new DataSource({
     Recommendation,
     Follow,
   ],
+  logging: ["error"],
 });

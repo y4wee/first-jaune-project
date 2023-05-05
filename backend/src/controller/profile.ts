@@ -15,6 +15,7 @@ export const ProfileController: IcontrollerProfile = {
           "parcours",
           "experiences",
           "recommendationsReceived",
+          "recommendationsReceived.sender",
         ],
       });
       res.send(profile);

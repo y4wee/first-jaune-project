@@ -24,7 +24,6 @@ export class Recommendation {
 
   @ManyToOne(() => Profile, (profile) => profile.id, {
     onDelete: "CASCADE",
-    eager: true,
   })
   sender: Profile;
 }

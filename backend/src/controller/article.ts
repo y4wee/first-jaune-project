@@ -29,7 +29,7 @@ export const ArticleController: IcontrollerArticle = {
     try {
       const repository = dataSource.getRepository(Article);
       const articles = await repository.find({
-        relations: ["profile", "comments"],
+        relations: ["profile", "comments", "comments.profile"],
       });
       res.send(articles);
     } catch (error) {

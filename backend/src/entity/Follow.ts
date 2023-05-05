@@ -10,7 +10,6 @@ export class Follow {
 
   @ManyToOne(() => Profile, (profile) => profile.id, {
     onDelete: "CASCADE",
-    eager: true,
   })
   following: Profile;
 

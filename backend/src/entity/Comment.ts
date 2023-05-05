@@ -25,7 +25,6 @@ export class Comment {
 
   @ManyToOne(() => Profile, (profile) => profile.id, {
     onDelete: "CASCADE",
-    eager: true,
   })
   profile: Profile;
 

@@ -11,9 +11,14 @@ export const NetworkController: IcontrollerNetwork = {
         where: {
           id: +req.params.id,
         },
-        relations: ["followers", "following"],
+        relations: [
+          "followers",
+          "following",
+          "followers.follower",
+          "following.following",
+        ],
       });
-
+      console.log(network);
       res.send(network);
     } catch (error) {
       res.send("Error while following : " + error);
