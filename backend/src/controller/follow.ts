@@ -23,7 +23,7 @@ export const FollowController: IcontrollerFollow = {
       });
 
       const follow = new Follow();
-      
+
       follow.following = following;
       follow.followingNetwork = following.network;
       follow.follower = follower;

@@ -8,6 +8,7 @@ import { ArticleController } from "./controller/article";
 import { CommentController } from "./controller/comment";
 import { RecommendController } from "./controller/recommend";
 import { FollowController } from "./controller/follow";
+import { NetworkController } from "./controller/network";
 
 const app = express();
 
@@ -23,6 +24,8 @@ app.delete("/api/wilder", WilderController.deleteOne);
 app.get("/api/profile/:id", ProfileController.getOne);
 app.get("/api/profiles", ProfileController.getAll);
 app.put("/api/profile", ProfileController.updateOwner);
+
+app.get("/api/network/:id", NetworkController.get);
 
 app.post("/api/skill", SkillController.create);
 app.get("/api/skill/names", SkillController.getAllNames);
