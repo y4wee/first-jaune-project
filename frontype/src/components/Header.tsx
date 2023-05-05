@@ -1,6 +1,7 @@
 import { NavLink } from "react-router-dom";
 
 import styles from "../styles/Header.module.css";
+import Form from "./Form";
 
 const Header = () => {
   const navLinks = [
@@ -12,6 +13,8 @@ const Header = () => {
     <header className={styles.header}>
       <div className={styles.container}>
         <h1>Wilders Books</h1>
+
+        <Form />
 
         <ul className={styles.nav}>
           {navLinks.map((navLink) => (

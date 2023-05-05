@@ -30,7 +30,3 @@ export interface Idetails {
 // export interface IpropsChangeWilder {
 //   onchangeWilder: () => void;
 // }
-
-export interface Iform {
-  wilders: Iprofile[];
-}

@@ -6,9 +6,6 @@ interface ItypedRequestBody<T> extends Request {
 interface IgetOneProfile {
   id: number;
 }
-interface IgetAllProfile {
-  id: number;
-}
 
 interface IupdateProfile {
   id: number;
@@ -20,7 +17,7 @@ interface IupdateProfile {
 
 export interface IcontrollerProfile {
   getOne(req: ItypedRequestBody<IgetOneProfile>, res: Response): Promise<void>;
-  getAll(req: ItypedRequestBody<IgetAllProfile>, res: Response): Promise<void>;
+  getAll(req: Request, res: Response): Promise<void>;
   updateOwner(
     req: ItypedRequestBody<IupdateProfile>,
     res: Response

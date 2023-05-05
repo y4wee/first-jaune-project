@@ -1,8 +1,6 @@
-import { Not } from "typeorm";
 import { IcontrollerProfile } from "../interfaces/profile";
 import { dataSource } from "../utils";
 import { Profile } from "../entity/Profile";
-import { Wilder } from "../entity/Wilder";
 
 export const ProfileController: IcontrollerProfile = {
   getOne: async (req, res) => {
@@ -28,9 +26,7 @@ export const ProfileController: IcontrollerProfile = {
   getAll: async (req, res) => {
     try {
       const repository = dataSource.getRepository(Profile);
-      const profiles = await repository.find({
-        where: { id: Not(req.body.id) },
-      });
+      const profiles = await repository.find();
       res.send(profiles);
     } catch (error) {
       res.send(error);

@@ -12,7 +12,7 @@ const AddWilder = () => {
     city: "",
     description: "",
   });
-  const { updateWilders } = useContext(ProfileContext);
+  const { updateProfile } = useContext(ProfileContext);
 
   const onPosted = () => {
     setWilder({
@@ -20,7 +20,7 @@ const AddWilder = () => {
       city: "",
       description: "",
     });
-    updateWilders();
+    updateProfile();
   };
 
   const handleCityChange = (e: ChangeEvent<HTMLInputElement>) => {

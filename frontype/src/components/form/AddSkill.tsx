@@ -1,19 +1,19 @@
 import { useState, ChangeEvent, useContext } from "react";
 
 import { ProfileContext } from "../../context/profile";
-import { Iform } from "../../interfaces/wilder";
+import { IprofileBase } from "../../interfaces/profile";
 import { IcreateSkill } from "../../interfaces/skill";
 import styles from "../../styles/form/AddSkill.module.css";
 
 import Post from "./Post";
 
-const AddSkill = ({ wilders }: Iform) => {
+const AddSkill = ({ profiles }: { profiles: IprofileBase[] }) => {
   const [skill, setSkill] = useState<IcreateSkill>({
     name: "",
     grade: 0,
     wilder: NaN,
   });
-  const { updateWilders } = useContext(ProfileContext);
+  const { updateProfile } = useContext(ProfileContext);
 
   const onPosted = () => {
     setSkill({
@@ -21,7 +21,7 @@ const AddSkill = ({ wilders }: Iform) => {
       grade: 0,
       wilder: NaN,
     });
-    updateWilders();
+    updateProfile();
   };
 
   const handleNameChange = (e: ChangeEvent<HTMLInputElement>) => {
@@ -56,9 +56,9 @@ const AddSkill = ({ wilders }: Iform) => {
         <label htmlFor="wilder_select">Choose a Wilder</label>
         <select name="wilders" id="wilder_select" onChange={handlewilderChange}>
           <option value={undefined}>--Choose a Wilder--</option>
-          {wilders?.map((wilder) => (
-            <option key={wilder.id} value={wilder.id}>
-              {wilder.profile.name}
+          {profiles?.map((profile) => (
+            <option key={profile.id} value={profile.id}>
+              {profile.name}
             </option>
           ))}
         </select>
