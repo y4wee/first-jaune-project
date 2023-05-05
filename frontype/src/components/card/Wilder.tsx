@@ -5,7 +5,7 @@ import { IpropsWilder } from "../../interfaces/wilder";
 import styles from "../../styles/Wilder.module.css";
 import blank_pic from "../../assets/blank.png";
 
-import Skill from "./Skill";
+import Skill from "../profile/Skill";
 import ButtonDelete from "../button/ButtonDelete";
 
 const Wilder = ({
